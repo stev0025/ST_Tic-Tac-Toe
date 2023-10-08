@@ -36,3 +36,30 @@ TBD
 
 ### Restart Option
 TBD
+
+## State Machine
+### List of States
+#### Initialization
+TBD
+#### Player X's Turn
+TBD
+#### Player O's Turn
+TBD
+#### Check Win
+TBD
+#### End Game
+TBD
+#### Restart
+TBD
+
+### Transitions
+#### Initialization -> Player X's Turn
+#### Player X's Turn -> Check Win
+#### Player O's Turn -> Check Win
+#### Check Win -> Player O's Turn
+#### Check Win -> Player X's Turn
+#### Check Win -> Check Draw
+#### Check Win -> End Game
+#### Check Draw -> End Game
+#### End Game -> Restart
+#### Restart -> Initialization
