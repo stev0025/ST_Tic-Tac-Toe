@@ -50,29 +50,26 @@ TBD
 ## State Machine
 ### List of States
 #### Initialization
-TBD
+Set up the game and establish the starting conditions.
+Welcome the players & provide brief overview of the game.
+Display the game board & current scores.
+
 #### Player X's Turn
-TBD
+Allow Player X to interact with the game board by choosing a row & column to place their 'X' marker.
+Update the game board by placing an 'X' in the chosen row & column.
+
 #### Player O's Turn
-TBD
+Exactly the same as "Player X's Turn" state, but the 2nd player & with 'O' marker.
+
 #### Check Win
-TBD
+Assess the current game board to determine if there is a winner or if a draw condition has been met after a player's turn.
+
 #### End Game
-TBD
-#### Restart
-TBD
+Conclude the game by displaying the result, whether it's a win for a player or a draw.
+Ask players if they want to play another round or exit the game.
 
 ### Transitions
-#### Initialization -> Player X's Turn
-#### Player X's Turn -> Check Win
-#### Player O's Turn -> Check Win
-#### Check Win -> Player O's Turn
-#### Check Win -> Player X's Turn
-#### Check Win -> Check Draw
-#### Check Win -> End Game
-#### Check Draw -> End Game
-#### End Game -> Restart
-#### Restart -> Initialization
+![State Machine Diagram](./StateMachine.drawio.png)
 
 ## Code Structure
 ST_Tic-Tac-Toe
