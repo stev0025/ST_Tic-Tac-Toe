@@ -1,5 +1,15 @@
 # Tic-Tac-Toe Game in C
 
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Installation](#installation)
+3. [How to Play](#how-to-play)
+4. [Features](#features)
+5. [State Machine](#state-machine)
+6. [Code Structure](#code-structure)
+7. [Architecture](#architecture)
+
+## Introduction
 A simple Tic-Tac-Toe game implemented in C language.
 The game allows 2 players to take turns and compete againts each other in classic Tic-Tac-Toe.
 Both players play in the same device.
@@ -63,3 +73,20 @@ TBD
 #### Check Draw -> End Game
 #### End Game -> Restart
 #### Restart -> Initialization
+
+## Code Structure
+ST_Tic-Tac-Toe
+|-- src/
+|   |-- main.c
+|   |-- state_machine.c
+|   |-- game_logic.c
+|   |-- render.c
+|   |-- user_input.c
+|-- include/
+|   |-- state_machine.h
+|   |-- game_logic.h
+|   |-- render.h
+|   |-- user_input.h
+
+## Architecture
+TBD, likely Event-Driven State Machine Architecture
