@@ -1,6 +1,11 @@
 /* list of states */
 enum StateMachineStates {
-  TBD,
+  STATE_INIT,
+  STATE_PLAYER_X_TURN,
+  STATE_PLAYER_O_TURN,
+  STATE_CHECK_WIN,
+  STATE_END_GAME,
+  STATE_RESTART
 };
 
 /**
