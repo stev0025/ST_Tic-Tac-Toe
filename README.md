@@ -8,6 +8,7 @@
 5. [State Machine](#state-machine)
 6. [Code Structure](#code-structure)
 7. [Architecture](#architecture)
+8. [Action Items](#action-items)
 
 ## Introduction
 A simple Tic-Tac-Toe game implemented in C language.
@@ -87,3 +88,11 @@ ST_Tic-Tac-Toe
 
 ## Architecture
 TBD, likely Event-Driven State Machine Architecture
+
+## Action Items
+- Make main() into an event-driven loop: (1) wait for an event, (2) run state machine functions
+- list down all the events. Consider to put in state_machine.h or a new file
+- change the StateMachine diagram in README
+- fill in the state machine handlers
+- create the display inside render files
+- create user input validation

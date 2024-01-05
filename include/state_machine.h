@@ -9,13 +9,13 @@ typedef enum {
 } StateMachineStates;
 
 /**
- * @brief transitions from current to new states
+ * @brief TBD
  * 
  * TBD: explain
  * 
  * @param TBD
  */
-void statemachine_transition(current_state);
+void statemachine_handler(event);
 
 /**
  * @brief 

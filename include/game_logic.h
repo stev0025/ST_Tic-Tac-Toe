@@ -1,3 +1,5 @@
+#define BOARD_SIZE 3
+
 /**
  * @brief initialize game
  */
