@@ -2,6 +2,18 @@ include "game_logic.h"
 include "render.h"
 
 /**
+ * @brief center text by adding padding based on total width
+ */
+static void render_center_text(char* text, int totalWidth) {
+    int len = strlen(text);
+    int padding = (totalWidth - len) / 2;
+    for (int i = 0; i < padding; i++) {
+        putchar(' ');
+    }
+    printf("%s\n", text);
+}
+
+/**
  * @brief render the game board
  * 
  * Below is the example of rendered 3x3 game board:
@@ -33,7 +45,7 @@ static void render_gameboard() {
     }
 }
 
-void render_overall_display() {
+void render_gameboard_overall_display() {
     int score[2];
 
     /* get current score */
@@ -49,6 +61,25 @@ void render_overall_display() {
 
     /* mention the player to play the current turn */
     printf("Current turn:  Player %c", player_current_turn);
+
+    return;
+}
+
+void render_welcome_message() {
+    int max_width = 79;
+
+    /* displaying welcome message */
+    render_center_text("Welcome to Tic-Tac-Toe!", max_width);
+    printf("\n");
+    render_center_text("This is a 2-player turn-based game.", max_width);
+    render_center_text("Each player will take turns to place either 'X' or 'O' on the board.", max_width);
+    printf("\n");
+
+    /* wait before asking for user input */
+    sleep(2);
+
+    /* displaying message to ask user input */
+    render_center_text("Please click any button to continue", max_width);
 
     return;
 }
