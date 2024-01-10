@@ -74,7 +74,7 @@ Predictable Behavior: The state machine approach provides a clear and predictabl
 #### Initialization
 The initial state when the game first launches.
 In this state, the game displays a welcome message and a brief introduction to the game.
-After displaying the welcome message and introduction for a few seconds, the game prompts the player with an instruction: 'Please click any button to continue'. This message serves to engage the player and signals that the game is ready to proceed upon their input.
+After displaying the welcome message and introduction for a few seconds, The game prompts the player to input any button in order to continue. This message serves to engage the player and signals that the game is ready to proceed upon their input.
 
 #### Empty Board
 This state displays the current scores.

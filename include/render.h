@@ -1,5 +1,5 @@
 /**
- * @brief render the whole display
+ * @brief render the whole display of the game board
  * 
 * Below is the example of rendered 3x3 game board:
  * X   X        OOO 
@@ -14,4 +14,9 @@
  * 
  * Current turn: Player X
  */
-void render_overall_display();
+void render_gameboard_overall_display();
+
+/**
+ * @brief render the welcome message
+ */
+void render_welcome_message();
