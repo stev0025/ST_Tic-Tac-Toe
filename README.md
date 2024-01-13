@@ -116,15 +116,15 @@ The "First Player Action" event marks that we have given enough time to the user
 #### Restart
 
 ### Transitions between states
-Initialization --StartGame--> Empty Board
-Empty Board --FirstPlayerAction--> Player X's Turn
-Player X's Turn --PlayerFilledIn--> Check Win
-Player O's Turn --PlayerFilledIn--> Check Win
-Check Win --PlayerNextTurn--> Player X's Turn
-Check Win --PlayerNextTurn--> Player O's Turn
-Check Win --WinnerAnnounce--> End Game
-End Game --EndGame--> End Program
-End Game --Restart--> Empty Board
+Initialization  --StartGame        --> Empty Board
+Empty Board     --FirstPlayerAction--> Player X's Turn
+Player X's Turn --PlayerFilledIn   --> Check Win
+Player O's Turn --PlayerFilledIn   --> Check Win
+Check Win       --PlayerNextTurn   --> Player X's Turn
+Check Win       --PlayerNextTurn   --> Player O's Turn
+Check Win       --WinnerAnnounce   --> End Game
+End Game        --EndGame          --> End Program
+End Game        --Restart          --> Empty Board
 
 ## Code Structure
 ST_Tic-Tac-Toe
@@ -143,9 +143,8 @@ ST_Tic-Tac-Toe
 |   |-- user_input.h
 
 ## Action Items
-- Make main() into an event-driven loop: (1) wait for an event, (2) run state machine functions
-- list down all the events. Consider to put in state_machine.h or a new file
 - change the StateMachine diagram in README
 - fill in the state machine handlers
 - create the display inside render files
 - create user input validation
+- create logs
