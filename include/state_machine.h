@@ -7,7 +7,13 @@ typedef enum {
   STATE_PLAYER_O_TURN,
   STATE_CHECK_WIN,
   STATE_END_GAME
-} StateMachineStates;
+} States;
+
+/* return type for state machine functions */
+typedef enum {
+    RET_SM_SUCCESS,
+    RET_SM_FAIL
+} SMRet;
 
 /**
  * @brief TBD
@@ -16,9 +22,14 @@ typedef enum {
  * 
  * @param TBD
  */
-void statemachine_handler(event);
+EventsRet sm_handler(state);
 
 /**
- * @brief 
+ * @brief Get the next state based on the event
  */
-StateMachineStates statemachine_game_state_get();
+EventsRet sm_state_next_get();
+
+/**
+ * @brief Get the current state
+ */
+EventsRet sm_state_current_get();

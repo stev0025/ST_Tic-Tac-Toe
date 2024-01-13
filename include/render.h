@@ -14,7 +14,7 @@
  * 
  * Current turn: Player X
  */
-void render_gameboard_overall_display();
+void render_gameboard();
 
 /**
  * @brief render the welcome message

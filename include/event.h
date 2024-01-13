@@ -9,3 +9,9 @@ typedef enum {
   EVENT_END_GAME,
   EVENT_RESTART
 }Events;
+
+/* return type for event functions */
+typedef enum {
+    RET_EVENT_SUCCESS,
+    RET_EVENT_FAIL
+} EventsRet;

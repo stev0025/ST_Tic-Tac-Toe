@@ -1,26 +1,35 @@
 /* current state of the game */
-static StateMachineStates game_state;
+static States game_state;
 
-void statemachine_handler() {
+
+
+SMRet sm_handler(States state) {
+    switch (state) {
+        case STATE_INIT:
+            return sm_handle_init();
+            break;
+        /* TBD: continue other states */
+        default:
+            /* default statements */
+    }
+}
+
+SMRet sm_handle_init() {
 
 }
 
-void statemachine_handle_init() {
+SMRet sm_handle_player_x() {
 
 }
 
-void statemachine_handle_player_x() {
+SMRet sm_handle_player_o() {
 
 }
 
-void statemachine_handle_player_o() {
+SMRet sm_handle_check_win() {
 
 }
 
-void statemachine_handle_check_win() {
-
-}
-
-void statemachine_handle_end_game() {
+SMRet sm_handle_end_game() {
 
 }
