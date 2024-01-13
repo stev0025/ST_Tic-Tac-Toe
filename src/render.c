@@ -14,7 +14,7 @@ static void render_center_text(char* text, int totalWidth) {
 }
 
 /**
- * @brief render the game board
+ * @brief render the board
  * 
  * Below is the example of rendered 3x3 game board:
  * 
@@ -24,7 +24,7 @@ static void render_center_text(char* text, int totalWidth) {
  * ---+---+---
  *  O | X |   
  */
-static void render_gameboard() {
+static void render_gameboard_board() {
     char board[BOARD_SIZE][BOARD_SIZE];
 
     /* get current Tic-Tac-Toe board */
@@ -45,7 +45,7 @@ static void render_gameboard() {
     }
 }
 
-void render_gameboard_overall_display() {
+void render_gameboard() {
     int score[2];
 
     /* get current score */
