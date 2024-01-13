@@ -3,21 +3,43 @@
 #include <string.h>
 
 int main() {
-  /* initialize the game */
-  gamelogic_initialize_game();
+    bool running = true;
+    Events next_event = EVENT_NONE;
+    States next_state = STATE_NONE;
+    SMRet ret_sm = RET_SM_SUCCESS;
+    EventsRet ret_event = RET_EVENT_SUCCESS;
 
-  while(true) {
-    // Wait for an event
-    userinput_process_user_input();
-    // how if we create 'event' instead of 'user_input'?
-    // because 'event' encapsulates 'user_input', we can have much more flexible events that happened!
+    /* initialize games */
+    gamelogic_initialize_game();
+    /* TBD: error handling */
 
-    statemachine_handler(event);
+    while (running) {
+        /* Get Next Event */
+        ret_event = event_next_event_get(&next_event);
+        if (ret_event != RET_EVENT_SUCCESS) {
+          /* TBD: error handling */
+        }
 
-  }
+        /* Get Next State */
+        ret_sm = sm_state_next_get(next_event, &next_state);
+        if (ret_sm != RET_SM_SUCCESS) {
+          /* TBD: error handling */
+        }
 
-  /* terminate the game */
-  gamelogic_terminate_game();
+        /* Handle the next State */
+        ret_sm = sm_handler(next_state);
+        if (ret_sm != RET_SM_SUCCESS) {
+          /* TBD: error handling */
+        }
 
-  return 0;
+        /* Check if the game is still running */
+        gamelogic_is_game_running(&running);
+        /* TBD: error handling */
+    }
+
+    /* terminate the game */
+    gamelogic_terminate_game();
+    /* TBD: error handling */
+
+    return 0;
 }
