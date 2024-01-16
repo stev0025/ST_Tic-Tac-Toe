@@ -128,19 +128,22 @@ End Game        --Restart          --> Empty Board
 
 ## Code Structure
 ST_Tic-Tac-Toe
-|-- src/
-|   |-- event.c
-|   |-- game_logic.c
-|   |-- main.c
-|   |-- state_machine.c
-|   |-- render.c
-|   |-- user_input.c
 |-- include/
 |   |-- event.h
 |   |-- game_logic.h
 |   |-- state_machine.h
 |   |-- render.h
+|   |-- state_machine.h
 |   |-- user_input.h
+|-- src/
+|   |-- event.c
+|   |-- game_logic.c
+|   |-- main.c
+|   |-- render.c
+|   |-- state_machine.c
+|   |-- user_input.c
+|-- README.md
+
 
 ## Action Items
 - change the StateMachine diagram in README
