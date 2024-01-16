@@ -96,7 +96,12 @@ It could invite the next player to play.
 Conclude the game by displaying the result, whether it's a win for a player or a draw.
 Ask players if they want to play another round or exit the game.
 
+#### Error
+An error state when unexpected event occurs.
+
 ### List of Events
+#### Start Program
+
 #### Start Game
 The "Start Game" event is marking the transition from the initialization phase to the actual start of the game. This event is designed to occur at the end of the Initialization State.
 
@@ -107,7 +112,9 @@ The "First Player Action" event marks that we have given enough time to the user
 
 #### Player Filled In
 
-#### Player Next Turn
+#### Player X Next Turn
+
+#### Player O Next Turn
 
 #### Winner Announce
 
@@ -116,12 +123,13 @@ The "First Player Action" event marks that we have given enough time to the user
 #### Restart
 
 ### Transitions between states
+None            --StartProgram     --> Initialization
 Initialization  --StartGame        --> Empty Board
 Empty Board     --FirstPlayerAction--> Player X's Turn
 Player X's Turn --PlayerFilledIn   --> Check Win
 Player O's Turn --PlayerFilledIn   --> Check Win
-Check Win       --PlayerNextTurn   --> Player X's Turn
-Check Win       --PlayerNextTurn   --> Player O's Turn
+Check Win       --PlayerXNextTurn  --> Player X's Turn
+Check Win       --PlayerONextTurn  --> Player O's Turn
 Check Win       --WinnerAnnounce   --> End Game
 End Game        --EndGame          --> End Program
 End Game        --Restart          --> Empty Board

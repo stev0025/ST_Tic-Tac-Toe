@@ -4,8 +4,8 @@
 
 int main() {
     bool running = true;
-    Events next_event = EVENT_NONE;
-    States next_state = STATE_NONE;
+    Events next_event = EVENT_START;
+    States next_state = STATE_START;
     SMRet ret_sm = RET_SM_SUCCESS;
     EventsRet ret_event = RET_EVENT_SUCCESS;
 
