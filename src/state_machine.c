@@ -8,8 +8,7 @@ SMRet sm_state_transition[STATE_LAST][EVENT_LAST] = {
         STATE_X, // EVENT_START_GAME
         STATE_X, // EVENT_FIRST_PLAYER_ACTION
         STATE_X, // EVENT_PLAYER_FILLED_IN
-        STATE_X, // EVENT_PLAYER_X_NEXT_TURN
-        STATE_X, // EVENT_PLAYER_O_NEXT_TURN
+        STATE_X, // EVENT_PLAYER_NEXT_TURN
         STATE_X, // EVENT_WINNER_ANNOUNCE
         STATE_X, // EVENT_END_GAME
         STATE_X  // EVENT_RESTART
@@ -19,8 +18,7 @@ SMRet sm_state_transition[STATE_LAST][EVENT_LAST] = {
         STATE_EMPTY_BOARD, // EVENT_START_GAME
         STATE_X, // EVENT_FIRST_PLAYER_ACTION
         STATE_X, // EVENT_PLAYER_FILLED_IN
-        STATE_X, // EVENT_PLAYER_X_NEXT_TURN
-        STATE_X, // EVENT_PLAYER_O_NEXT_TURN
+        STATE_X, // EVENT_PLAYER_NEXT_TURN
         STATE_X, // EVENT_WINNER_ANNOUNCE
         STATE_X, // EVENT_END_GAME
         STATE_X  // EVENT_RESTART
@@ -28,32 +26,19 @@ SMRet sm_state_transition[STATE_LAST][EVENT_LAST] = {
     { // Current state: STATE_EMPTY_BOARD
         STATE_X, // EVENT_START_PROGRAM
         STATE_X, // EVENT_START_GAME
-        STATE_PLAYER_X_TURN, // EVENT_FIRST_PLAYER_ACTION
+        STATE_PLAYER_TURN, // EVENT_FIRST_PLAYER_ACTION
         STATE_X, // EVENT_PLAYER_FILLED_IN
-        STATE_X, // EVENT_PLAYER_X_NEXT_TURN
-        STATE_X, // EVENT_PLAYER_O_NEXT_TURN
+        STATE_X, // EVENT_PLAYER_NEXT_TURN
         STATE_X, // EVENT_WINNER_ANNOUNCE
         STATE_X, // EVENT_END_GAME
         STATE_X  // EVENT_RESTART
     },
-    { // Current state: STATE_PLAYER_X_TURN
+    { // Current state: STATE_PLAYER_TURN
         STATE_X, // EVENT_START_PROGRAM
         STATE_X, // EVENT_START_GAME
         STATE_X, // EVENT_FIRST_PLAYER_ACTION
         STATE_CHECK_WIN, // EVENT_PLAYER_FILLED_IN
-        STATE_X, // EVENT_PLAYER_X_NEXT_TURN
-        STATE_X, // EVENT_PLAYER_O_NEXT_TURN
-        STATE_X, // EVENT_WINNER_ANNOUNCE
-        STATE_X, // EVENT_END_GAME
-        STATE_X  // EVENT_RESTART
-    },
-    { // Current state: STATE_PLAYER_O_TURN
-        STATE_X, // EVENT_START_PROGRAM
-        STATE_X, // EVENT_START_GAME
-        STATE_X, // EVENT_FIRST_PLAYER_ACTION
-        STATE_CHECK_WIN, // EVENT_PLAYER_FILLED_IN
-        STATE_X, // EVENT_PLAYER_X_NEXT_TURN
-        STATE_X, // EVENT_PLAYER_O_NEXT_TURN
+        STATE_X, // EVENT_PLAYER_NEXT_TURN
         STATE_X, // EVENT_WINNER_ANNOUNCE
         STATE_X, // EVENT_END_GAME
         STATE_X  // EVENT_RESTART
@@ -63,8 +48,7 @@ SMRet sm_state_transition[STATE_LAST][EVENT_LAST] = {
         STATE_X, // EVENT_START_GAME
         STATE_X, // EVENT_FIRST_PLAYER_ACTION
         STATE_X, // EVENT_PLAYER_FILLED_IN
-        STATE_PLAYER_X_TURN, // EVENT_PLAYER_X_NEXT_TURN
-        STATE_PLAYER_O_TURN, // EVENT_PLAYER_O_NEXT_TURN
+        STATE_PLAYER_TURN, // EVENT_PLAYER_NEXT_TURN
         STATE_END_GAME, // EVENT_WINNER_ANNOUNCE
         STATE_X, // EVENT_END_GAME
         STATE_X  // EVENT_RESTART
@@ -74,8 +58,7 @@ SMRet sm_state_transition[STATE_LAST][EVENT_LAST] = {
         STATE_X, // EVENT_START_GAME
         STATE_X, // EVENT_FIRST_PLAYER_ACTION
         STATE_X, // EVENT_PLAYER_FILLED_IN
-        STATE_X, // EVENT_PLAYER_X_NEXT_TURN
-        STATE_X, // EVENT_PLAYER_O_NEXT_TURN
+        STATE_X, // EVENT_PLAYER_NEXT_TURN
         STATE_X, // EVENT_WINNER_ANNOUNCE
         STATE_X, // EVENT_END_GAME
         STATE_EMPTY_BOARD  // EVENT_RESTART
@@ -85,13 +68,35 @@ SMRet sm_state_transition[STATE_LAST][EVENT_LAST] = {
         STATE_X, // EVENT_START_GAME
         STATE_X, // EVENT_FIRST_PLAYER_ACTION
         STATE_X, // EVENT_PLAYER_FILLED_IN
-        STATE_X, // EVENT_PLAYER_X_NEXT_TURN
-        STATE_X, // EVENT_PLAYER_O_NEXT_TURN
+        STATE_X, // EVENT_PLAYER_NEXT_TURN
         STATE_X, // EVENT_WINNER_ANNOUNCE
         STATE_X, // EVENT_END_GAME
         STATE_X  // EVENT_RESTART
     }
 };
+
+static SMRet sm_handle_init() {
+    render_welcome_message();
+
+    /* TBD: scanf for user input, then continue */
+    return RET_SM_SUCCESS;
+}
+
+static SMRet sm_handle_empty_board() {
+
+}
+
+static SMRet sm_handle_player_turn() {
+
+}
+
+static SMRet sm_handle_check_win() {
+
+}
+
+static SMRet sm_handle_end_game() {
+
+}
 
 SMRet sm_handler(States state) {
     switch (state) {
@@ -101,11 +106,8 @@ SMRet sm_handler(States state) {
         case STATE_EMPTY_BOARD:
             return sm_handle_init();
             break;
-        case STATE_PLAYER_X_TURN:
-            return sm_handle_player_x();
-            break;
-        case STATE_PLAYER_O_TURN:
-            return sm_handle_player_o();
+        case STATE_PLAYER_TURN:
+            return sm_handle_player_turn();
             break;
         case STATE_CHECK_WIN:
             return sm_handle_check_win();
@@ -116,31 +118,4 @@ SMRet sm_handler(States state) {
         default:
             /* TBD: print error, then return fail */
     }
-}
-
-SMRet sm_handle_init() {
-    render_welcome_message();
-
-    /* TBD: scanf for user input, then continue */
-    return RET_SM_SUCCESS;
-}
-
-SMRet sm_handle_empty_board() {
-
-}
-
-SMRet sm_handle_player_x() {
-
-}
-
-SMRet sm_handle_player_o() {
-
-}
-
-SMRet sm_handle_check_win() {
-
-}
-
-SMRet sm_handle_end_game() {
-
 }
