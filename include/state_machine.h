@@ -3,8 +3,7 @@ typedef enum {
   STATE_NONE,
   STATE_INIT,
   STATE_EMPTY_BOARD,
-  STATE_PLAYER_X_TURN,
-  STATE_PLAYER_O_TURN,
+  STATE_PLAYER_TURN,
   STATE_CHECK_WIN,
   STATE_END_GAME,
   STATE_ERROR,
@@ -24,14 +23,14 @@ typedef enum {
  * 
  * @param TBD
  */
-EventsRet sm_handler(state);
+EventsRet sm_handler(States);
 
 /**
  * @brief Get the next state based on the event
  */
-EventsRet sm_state_next_get();
+EventsRet sm_state_next_get(Events ev, States *next_state);
 
 /**
  * @brief Get the current state
  */
-EventsRet sm_state_current_get();
+EventsRet sm_state_current_get(States *current_state);

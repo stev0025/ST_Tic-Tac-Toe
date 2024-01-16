@@ -80,12 +80,9 @@ After displaying the welcome message and introduction for a few seconds, The gam
 This state displays the current scores.
 Then, it displays the empty game board & current scores.
 
-#### Player X's Turn
-Allow Player X to interact with the game board by choosing a row & column to place their 'X' marker.
-Update the game board by placing an 'X' in the chosen row & column.
-
-#### Player O's Turn
-Exactly the same as "Player X's Turn" state, but the 2nd player & with 'O' marker.
+#### Player Turn
+Allow either Player X or Player O to interact with the game board by choosing a row & column to place their 'X' or 'O' marker.
+Update the game board by placing the marker in the chosen row & column.
 
 #### Check Win
 Assess the current game board.
@@ -112,9 +109,7 @@ The "First Player Action" event marks that we have given enough time to the user
 
 #### Player Filled In
 
-#### Player X Next Turn
-
-#### Player O Next Turn
+#### Player Next Turn
 
 #### Winner Announce
 
@@ -125,11 +120,9 @@ The "First Player Action" event marks that we have given enough time to the user
 ### Transitions between states
 None            --StartProgram     --> Initialization
 Initialization  --StartGame        --> Empty Board
-Empty Board     --FirstPlayerAction--> Player X's Turn
-Player X's Turn --PlayerFilledIn   --> Check Win
-Player O's Turn --PlayerFilledIn   --> Check Win
-Check Win       --PlayerXNextTurn  --> Player X's Turn
-Check Win       --PlayerONextTurn  --> Player O's Turn
+Empty Board     --FirstPlayerAction--> Player Turn
+Player Turn     --PlayerFilledIn   --> Check Win
+Check Win       --PlayerNextTurn   --> Player Turn
 Check Win       --WinnerAnnounce   --> End Game
 End Game        --EndGame          --> End Program
 End Game        --Restart          --> Empty Board
