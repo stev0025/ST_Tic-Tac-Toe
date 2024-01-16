@@ -2,7 +2,7 @@
 static States sm_state;
 
 /* state transition table, based on current state & incoming event */
-SMRet sm_state_transition[STATE_LAST][EVENT_LAST] = {
+GameRet sm_state_transition[STATE_LAST][EVENT_LAST] = {
     { // Current state: STATE_NONE
         STATE_INIT, // EVENT_START_PROGRAM
         STATE_X, // EVENT_START_GAME
@@ -75,30 +75,7 @@ SMRet sm_state_transition[STATE_LAST][EVENT_LAST] = {
     }
 };
 
-static SMRet sm_handle_init() {
-    render_welcome_message();
-
-    /* TBD: scanf for user input, then continue */
-    return RET_SM_SUCCESS;
-}
-
-static SMRet sm_handle_empty_board() {
-
-}
-
-static SMRet sm_handle_player_turn() {
-
-}
-
-static SMRet sm_handle_check_win() {
-
-}
-
-static SMRet sm_handle_end_game() {
-
-}
-
-SMRet sm_handler(States state) {
+GameRet sm_handler(States state) {
     switch (state) {
         case STATE_INIT:
             return sm_handle_init();
@@ -118,4 +95,41 @@ SMRet sm_handler(States state) {
         default:
             /* TBD: print error, then return fail */
     }
+}
+
+GameRet sm_state_next_get(Events ev, States *next_state) {
+    /* TBD: use sm_state_transition() to get the next state */
+}
+
+GameRet sm_state_current_get(States *current_state) {
+    *current_state = sm_state;
+    return RET_SUCCESS;
+}
+
+GameRet sm_state_current_set(States state) {
+    sm_state = state;
+    return RET_SUCCESS;
+}
+
+static GameRet sm_handle_init() {
+    render_welcome_message();
+
+    /* TBD: scanf for user input, then continue */
+    return RET_SUCCESS;
+}
+
+static GameRet sm_handle_empty_board() {
+
+}
+
+static GameRet sm_handle_player_turn() {
+
+}
+
+static GameRet sm_handle_check_win() {
+
+}
+
+static GameRet sm_handle_end_game() {
+
 }

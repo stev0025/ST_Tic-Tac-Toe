@@ -11,18 +11,12 @@ typedef enum {
   EVENT_LAST
 }Events;
 
-/* return type for event functions */
-typedef enum {
-    RET_EVENT_SUCCESS,
-    RET_EVENT_FAIL
-} EventsRet;
-
 /**
  * @brief get the next event
  */
-EventsRet event_next_event_get(Events *ev);
+GameRet event_next_event_get(Events *ev);
 
 /**
  * @brief set the next event
  */
-void event_set_next_event(Event event);
+GameRet event_set_next_event(Event event);
