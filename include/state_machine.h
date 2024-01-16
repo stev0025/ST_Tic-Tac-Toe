@@ -10,12 +10,6 @@ typedef enum {
   STATE_LAST
 } States;
 
-/* return type for state machine functions */
-typedef enum {
-    RET_SM_SUCCESS,
-    RET_SM_FAIL
-} SMRet;
-
 /**
  * @brief TBD
  * 
@@ -23,14 +17,19 @@ typedef enum {
  * 
  * @param TBD
  */
-EventsRet sm_handler(States);
+GameRet sm_handler(States state);
 
 /**
  * @brief Get the next state based on the event
  */
-EventsRet sm_state_next_get(Events ev, States *next_state);
+GameRet sm_state_next_get(Events ev, States *next_state);
 
 /**
  * @brief Get the current state
  */
-EventsRet sm_state_current_get(States *current_state);
+GameRet sm_state_current_get(States *current_state);
+
+/**
+ * @brief Set the current state
+ */
+GameRet sm_state_current_set(States state);

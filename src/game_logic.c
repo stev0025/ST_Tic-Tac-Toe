@@ -1,6 +1,9 @@
 /* Scores for players X and Y */
 static int gamelogic_score[2];
 
+/* Current player turn */
+PlayerTurn player_turn = PLAYER_LAST;
+
 /* TicTacToe board */
 char gamelogic_current_board[BOARD_SIZE][BOARD_SIZE] = {
     {' ', ' ', ' '},
@@ -8,17 +11,39 @@ char gamelogic_current_board[BOARD_SIZE][BOARD_SIZE] = {
     {' ', ' ', ' '}
 }
 
-/* Player to play in current turn */
-TBD
-
-void gamelogic_current_board_get(char board[BOARD_SIZE][BOARD_SIZE]) {
+GameRet gamelogic_current_board_get(char **board) {
     TBD;
 }
 
-void gamelogic_score_get(int score[2]) {
+GameRet gamelogic_score_get(int score[2]) {
     TBD;
 }
 
-void gamelogic_initialize_game() {
-    TBD;
+GameRet gamelogic_initialize_game() {
+    GameRet ret = RET_LAST;
+
+    ret = event_set_next_event(EVENT_START_PROGRAM);
+    if (ret != RET_SUCCESS) {
+        /* TBD: error catcher */
+    };
+
+    ret = sm_state_current_set(STATE_NONE);
+    if (ret != RET_SUCCESS) {
+        /* TBD: error catcher */
+    };
+
+    ret = gamelogic_player_turn_set(PLAYER_TURN_X);
+    if (ret != RET_SUCCESS) {
+        /* TBD: error catcher */
+    };
+}
+
+GameRet gamelogic_player_turn_set(PlayerTurn player) {
+    player_turn = player;
+    return RET_SUCCESS;
+}
+
+GameRet gamelogic_player_turn_get(PlayerTurn *player) {
+    *player = player_turn;
+    return RET_SUCCESS;
 }

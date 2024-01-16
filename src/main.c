@@ -6,8 +6,8 @@ int main() {
     bool running = true;
     Events next_event = EVENT_START;
     States next_state = STATE_START;
-    SMRet ret_sm = RET_SM_SUCCESS;
-    EventsRet ret_event = RET_EVENT_SUCCESS;
+    GameRet ret_sm = RET_SUCCESS;
+    GameRet ret_event = RET_SUCCESS;
 
     /* initialize games */
     gamelogic_initialize_game();
@@ -16,19 +16,19 @@ int main() {
     while (running) {
         /* Get Next Event */
         ret_event = event_next_event_get(&next_event);
-        if (ret_event != RET_EVENT_SUCCESS) {
+        if (ret_event != RET_SUCCESS) {
           /* TBD: error handling */
         }
 
         /* Get Next State */
         ret_sm = sm_state_next_get(next_event, &next_state);
-        if (ret_sm != RET_SM_SUCCESS) {
+        if (ret_sm != RET_SUCCESS) {
           /* TBD: error handling */
         }
 
         /* Handle the next State */
         ret_sm = sm_handler(next_state);
-        if (ret_sm != RET_SM_SUCCESS) {
+        if (ret_sm != RET_SUCCESS) {
           /* TBD: error handling */
         }
 
