@@ -2,6 +2,9 @@
 
 /**
  * @brief initialize game
+ * 
+ * 1. Set next event into EVENT_START_PROGRAM
+ * 2. Set current state into STATE_NONE
  */
 void gamelogic_initialize_game();
 

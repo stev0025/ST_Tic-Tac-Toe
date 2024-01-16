@@ -6,7 +6,9 @@ typedef enum {
   STATE_PLAYER_X_TURN,
   STATE_PLAYER_O_TURN,
   STATE_CHECK_WIN,
-  STATE_END_GAME
+  STATE_END_GAME,
+  STATE_ERROR,
+  STATE_LAST
 } States;
 
 /* return type for state machine functions */
