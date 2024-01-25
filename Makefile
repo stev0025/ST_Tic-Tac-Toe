@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -Iinclude -Wall -Wextra -Wno-unused-parameter -Wno-unused-variable
+CFLAGS := -Iinclude -Wall -Wextra -Wno-unused-parameter -Wno-unused-variable # TODO: use Wall only
 LDFLAGS :=
 SRC_DIR := src
 OBJ_DIR := obj
