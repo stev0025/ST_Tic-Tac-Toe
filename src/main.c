@@ -1,11 +1,15 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#include "game_logic.h"
+#include "event.h"
+#include "state_machine.h"
 
 int main() {
     bool running = true;
-    Events next_event = EVENT_START;
-    States next_state = STATE_START;
+    Events next_event = EVENT_LAST;
+    States next_state = STATE_LAST;
     GameRet ret_sm = RET_SUCCESS;
     GameRet ret_event = RET_SUCCESS;
 

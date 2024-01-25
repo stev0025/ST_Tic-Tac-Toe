@@ -16,7 +16,9 @@ The game allows 2 players to take turns and compete againts each other in classi
 Both players play in the same device.
 
 ## Installation
-TBD
+TBD: Please explain thoroughly
+make
+make clean
 
 ## How to Play
 TBD
@@ -118,6 +120,7 @@ The "First Player Action" event marks that we have given enough time to the user
 #### Restart
 
 ### Transitions between states
+```
 None            --StartProgram     --> Initialization
 Initialization  --StartGame        --> Empty Board
 Empty Board     --FirstPlayerAction--> Player Turn
@@ -126,8 +129,10 @@ Check Win       --PlayerNextTurn   --> Player Turn
 Check Win       --WinnerAnnounce   --> End Game
 End Game        --EndGame          --> End Program
 End Game        --Restart          --> Empty Board
+```
 
 ## Code Structure
+```
 ST_Tic-Tac-Toe
 |-- include/
 |   |-- event.h
@@ -144,7 +149,7 @@ ST_Tic-Tac-Toe
 |   |-- state_machine.c
 |   |-- user_input.c
 |-- README.md
-
+```
 
 ## Action Items
 - change the StateMachine diagram in README
