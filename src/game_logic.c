@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include "game_logic.h"
 #include "event.h"
 #include "state_machine.h"
@@ -35,6 +36,12 @@ GameRet gamelogic_player_turn_get(PlayerTurn *player) {
     return RET_SUCCESS;
 }
 
+GameRet gamelogic_is_game_running(bool *running) {
+    /* TBD: return running for now */
+    *running = true;
+    return RET_SUCCESS;
+}
+
 GameRet gamelogic_initialize_game() {
     GameRet ret = RET_LAST;
 
@@ -53,5 +60,10 @@ GameRet gamelogic_initialize_game() {
         /* TBD: error catcher */
     };
 
+    return RET_SUCCESS;
+}
+
+GameRet gamelogic_terminate_game() {
+    /* TBD: return success for now */
     return RET_SUCCESS;
 }

@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include "game_logic.h"
 #include "event.h"
 #include "state_machine.h"
