@@ -1,3 +1,8 @@
+#include <stdbool.h>
+#include "game_logic.h"
+#include "event.h"
+#include "state_machine.h"
+
 /* Scores for players X and Y */
 static int gamelogic_score[2];
 
@@ -9,14 +14,32 @@ char gamelogic_current_board[BOARD_SIZE][BOARD_SIZE] = {
     {' ', ' ', ' '},
     {' ', ' ', ' '},
     {' ', ' ', ' '}
-}
+};
 
 GameRet gamelogic_current_board_get(char **board) {
-    TBD;
+    // TBD;
+    return RET_LAST;
 }
 
 GameRet gamelogic_score_get(int score[2]) {
-    TBD;
+    // TBD;
+    return RET_LAST;
+}
+
+GameRet gamelogic_player_turn_set(PlayerTurn player) {
+    player_turn = player;
+    return RET_SUCCESS;
+}
+
+GameRet gamelogic_player_turn_get(PlayerTurn *player) {
+    *player = player_turn;
+    return RET_SUCCESS;
+}
+
+GameRet gamelogic_is_game_running(bool *running) {
+    /* TBD: return running for now */
+    *running = true;
+    return RET_SUCCESS;
 }
 
 GameRet gamelogic_initialize_game() {
@@ -36,14 +59,11 @@ GameRet gamelogic_initialize_game() {
     if (ret != RET_SUCCESS) {
         /* TBD: error catcher */
     };
-}
 
-GameRet gamelogic_player_turn_set(PlayerTurn player) {
-    player_turn = player;
     return RET_SUCCESS;
 }
 
-GameRet gamelogic_player_turn_get(PlayerTurn *player) {
-    *player = player_turn;
+GameRet gamelogic_terminate_game() {
+    /* TBD: return success for now */
     return RET_SUCCESS;
 }

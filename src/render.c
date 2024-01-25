@@ -1,5 +1,9 @@
-include "game_logic.h"
-include "render.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <stdbool.h>
+#include <string.h>
+#include "game_logic.h"
+#include "render.h"
 
 /**
  * @brief center text by adding padding based on total width
@@ -25,7 +29,7 @@ static void render_center_text(char* text, int totalWidth) {
  *  O | X |   
  */
 static void render_gameboard_board() {
-    char board[BOARD_SIZE][BOARD_SIZE];
+    char **board;
 
     /* get current Tic-Tac-Toe board */
     gamelogic_current_board_get(board);
@@ -47,6 +51,7 @@ static void render_gameboard_board() {
 
 void render_gameboard() {
     int score[2];
+    PlayerTurn player;
 
     /* get current score */
     gamelogic_score_get(score);
@@ -60,7 +65,8 @@ void render_gameboard() {
     render_gameboard();
 
     /* mention the player to play the current turn */
-    printf("Current turn:  Player %c", player_current_turn);
+    gamelogic_player_turn_get(&player);
+    printf("Current turn:  Player %c", player);
 
     return;
 }

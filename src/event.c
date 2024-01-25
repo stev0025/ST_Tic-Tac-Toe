@@ -1,3 +1,8 @@
+#include <stdbool.h>
+#include "game_logic.h"
+#include "event.h"
+#include "state_machine.h"
+
 /* next event to be consumed */
 static Events next_event;
 
@@ -7,7 +12,7 @@ GameRet event_next_event_get(Events *ev) {
   return RET_SUCCESS;
 }
 
-event_set_next_event event_set_next_event(Event event) {
+GameRet event_set_next_event(Events event) {
   next_event = event;
 
   return RET_SUCCESS;
