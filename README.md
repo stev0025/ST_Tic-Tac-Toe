@@ -137,6 +137,7 @@ ST_Tic-Tac-Toe
 |-- include/
 |   |-- event.h
 |   |-- game_logic.h
+|   |-- logs.h
 |   |-- state_machine.h
 |   |-- render.h
 |   |-- state_machine.h
@@ -144,6 +145,7 @@ ST_Tic-Tac-Toe
 |-- src/
 |   |-- event.c
 |   |-- game_logic.c
+|   |-- logs.c
 |   |-- main.c
 |   |-- render.c
 |   |-- state_machine.c

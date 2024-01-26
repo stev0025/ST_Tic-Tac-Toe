@@ -1,3 +1,6 @@
+#ifndef GAME_LOGIC_H
+#define GAME_LOGIC_H
+
 /* board size */
 #define BOARD_SIZE 3
 
@@ -45,3 +48,5 @@ GameRet gamelogic_current_board_get(char **board);
  * @brief get current score
  */
 GameRet gamelogic_score_get(int score[2]);
+
+#endif // GAME_LOGIC_H

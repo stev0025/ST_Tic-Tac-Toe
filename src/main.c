@@ -36,16 +36,18 @@ int main() {
         }
 
         /* Check if the game is still running */
-        ret = gamelogic_is_game_running(&running);
-        if (ret != RET_SUCCESS) {
-            /* TBD: error handling */
-        }
-        
+        // ret = gamelogic_is_game_running(&running);
+        // if (ret != RET_SUCCESS) {
+        //     /* TBD: error handling */
+        // }
+        running = false; // TBD: just stop it for testing
     }
 
     /* terminate the game */
-    gamelogic_terminate_game();
-    /* TBD: error handling */
+    ret = gamelogic_terminate_game();
+    if (ret != RET_SUCCESS) {
+        /* TBD: error handling */
+    }
 
     return 0;
 }

@@ -2,6 +2,7 @@
 #include "game_logic.h"
 #include "event.h"
 #include "state_machine.h"
+#include "render.h"
 
 /* current state of the program */
 static States sm_state;
