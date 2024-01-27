@@ -1,3 +1,6 @@
+#ifndef STATE_MACHINE_H
+#define STATE_MACHINE_H
+
 /* list of states */
 typedef enum {
   STATE_NONE,
@@ -33,3 +36,5 @@ GameRet sm_state_current_get(States *current_state);
  * @brief Set the current state
  */
 GameRet sm_state_current_set(States state);
+
+#endif // STATE_MACHINE_H

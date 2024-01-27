@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include "logs.h"
 #include "game_logic.h"
 #include "event.h"
 #include "state_machine.h"
@@ -45,6 +46,10 @@ GameRet gamelogic_is_game_running(bool *running) {
 GameRet gamelogic_initialize_game() {
     GameRet ret = RET_LAST;
 
+    log_init();
+
+    log_message(LOG_INFO, "Starting game initialization.");
+
     ret = event_set_next_event(EVENT_START_PROGRAM);
     if (ret != RET_SUCCESS) {
         /* TBD: error catcher */
@@ -64,6 +69,8 @@ GameRet gamelogic_initialize_game() {
 }
 
 GameRet gamelogic_terminate_game() {
+    log_message(LOG_INFO, "Starting game termination.");
+
     /* TBD: return success for now */
     return RET_SUCCESS;
 }

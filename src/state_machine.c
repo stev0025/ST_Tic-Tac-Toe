@@ -2,6 +2,7 @@
 #include "game_logic.h"
 #include "event.h"
 #include "state_machine.h"
+#include "render.h"
 
 /* current state of the program */
 static States sm_state;
@@ -106,11 +107,13 @@ GameRet sm_handler(States state) {
             break;
         default:
             /* TBD: print error, then return fail */
+            return RET_SM_FAIL;
     }
 }
 
 GameRet sm_state_next_get(Events ev, States *next_state) {
     /* TBD: use sm_state_transition() to get the next state */
+    return RET_SUCCESS;
 }
 
 GameRet sm_state_current_get(States *current_state) {
@@ -131,17 +134,21 @@ static GameRet sm_handle_init() {
 }
 
 static GameRet sm_handle_empty_board() {
-
+    /* TBD */
+    return RET_SUCCESS;
 }
 
 static GameRet sm_handle_player_turn() {
-
+    /* TBD */
+    return RET_SUCCESS;
 }
 
 static GameRet sm_handle_check_win() {
-
+    /* TBD */
+    return RET_SUCCESS;
 }
 
 static GameRet sm_handle_end_game() {
-
+    /* TBD */
+    return RET_SUCCESS;
 }

@@ -1,3 +1,6 @@
+#ifndef EVENT_H
+#define EVENT_H
+
 /* list of events */
 typedef enum {
   EVENT_START_PROGRAM,
@@ -20,3 +23,5 @@ GameRet event_next_event_get(Events *ev);
  * @brief set the next event
  */
 GameRet event_set_next_event(Events event);
+
+#endif // EVENT_H

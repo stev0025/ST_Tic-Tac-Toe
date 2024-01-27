@@ -1,3 +1,6 @@
+#ifndef RENDER_H
+#define RENDER_H
+
 /**
  * @brief render the whole display of the game board
  * 
@@ -20,3 +23,5 @@ void render_gameboard();
  * @brief render the welcome message
  */
 void render_welcome_message();
+
+#endif // RENDER_H

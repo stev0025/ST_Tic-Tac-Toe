@@ -16,9 +16,8 @@ The game allows 2 players to take turns and compete againts each other in classi
 Both players play in the same device.
 
 ## Installation
-TBD: Please explain thoroughly
-make
-make clean
+1. Build the code by executing `make`
+2. Launch the game by executing `./launch_game.sh`
 
 ## How to Play
 TBD
@@ -137,6 +136,7 @@ ST_Tic-Tac-Toe
 |-- include/
 |   |-- event.h
 |   |-- game_logic.h
+|   |-- logs.h
 |   |-- state_machine.h
 |   |-- render.h
 |   |-- state_machine.h
@@ -144,6 +144,7 @@ ST_Tic-Tac-Toe
 |-- src/
 |   |-- event.c
 |   |-- game_logic.c
+|   |-- logs.c
 |   |-- main.c
 |   |-- render.c
 |   |-- state_machine.c

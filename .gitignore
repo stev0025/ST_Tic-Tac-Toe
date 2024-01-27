@@ -1,2 +1,4 @@
 obj/
 bin/
+logs/
+launch_game.sh
