@@ -16,9 +16,8 @@ The game allows 2 players to take turns and compete againts each other in classi
 Both players play in the same device.
 
 ## Installation
-TBD: Please explain thoroughly
-make
-make clean
+1. Build the code by executing `make`
+2. Launch the game by executing `./launch_game.sh`
 
 ## How to Play
 TBD
