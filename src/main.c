@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#include "logs.h"
 #include "game_logic.h"
 #include "event.h"
 #include "state_machine.h"
@@ -42,6 +43,8 @@ int main() {
         // }
         running = false; // TBD: just stop it for testing
     }
+
+    log_message(LOG_INFO, "Exiting game loop.");
 
     /* terminate the game */
     ret = gamelogic_terminate_game();

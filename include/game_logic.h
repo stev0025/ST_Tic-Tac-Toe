@@ -22,10 +22,11 @@ typedef enum {
 
 /**
  * @brief initialize game
- * 
- * 1. Set next event into EVENT_START_PROGRAM
- * 2. Set current state into STATE_NONE
- * 3. Set current player turn to be player X
+ *
+ * - Initialize log file
+ * - Set next event into EVENT_START_PROGRAM
+ * - Set current state into STATE_NONE
+ * - Set current player turn to be player X
  */
 GameRet gamelogic_initialize_game();
 
@@ -48,5 +49,10 @@ GameRet gamelogic_current_board_get(char **board);
  * @brief get current score
  */
 GameRet gamelogic_score_get(int score[2]);
+
+/**
+ * @brief get current player turn
+ */
+GameRet gamelogic_player_turn_get(PlayerTurn *player);
 
 #endif // GAME_LOGIC_H

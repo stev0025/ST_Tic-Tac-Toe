@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <pthread.h>
+#include <string.h>
 #include <time.h>
 #include "logs.h"
 
@@ -9,14 +10,18 @@ static pthread_mutex_t log_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void log_init() {
     char filename[40];
+    char filepath[256];
     time_t now = time(NULL);
     struct tm *t = localtime(&now);
 
     /* Generate the logs file name: log_yyyymmdd_hhmmss.txt */
     strftime(filename, sizeof(filename), "log_%Y%m%d_%H%M%S.txt", t);
 
+    strcpy(filepath, "../logs/");
+    strcat(filepath, filename);
+
     /* create the logs file */
-    log_file = fopen("log.txt", "w");
+    log_file = fopen(filepath, "w");
     if (!log_file) {
         perror("Error opening log file");
     }
@@ -29,7 +34,7 @@ void log_message(int log_level, const char *format, ...) {
     time_t now = time(NULL);
     struct tm *t = localtime(&now);
     char time_str[20];
-    strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", t);
+    strftime(time_str, sizeof(time_str), "%H:%M:%S", t);
 
     /* write to log file: add time */
     fprintf(log_file, "%s ", time_str);
