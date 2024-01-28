@@ -36,6 +36,8 @@ void log_message(int log_level, const char *format, ...) {
     char time_str[20];
     strftime(time_str, sizeof(time_str), "%H:%M:%S", t);
 
+    /* TBD: disable DEBUG if DEBUG_EN is not true */
+
     /* write to log file: add time */
     fprintf(log_file, "%s ", time_str);
 
@@ -49,6 +51,9 @@ void log_message(int log_level, const char *format, ...) {
             break;
         case LOG_ERROR:
             fprintf(log_file, "[ERROR]: ");
+            break;
+        case LOG_DEBUG:
+            fprintf(log_file, "[DEBUG]: ");
             break;
         default:
             fprintf(log_file, "[UNKNOWN]: ");
@@ -67,6 +72,8 @@ void log_message(int log_level, const char *format, ...) {
     va_end(args);
 
     pthread_mutex_unlock(&log_mutex);
+
+    return;
 }
 
 void log_cleanup() {
