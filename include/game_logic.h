@@ -56,4 +56,9 @@ GameRet gamelogic_score_get(int score[2]);
  */
 GameRet gamelogic_player_turn_get(PlayerTurn *player);
 
+/**
+ * @brief Clear terminal
+ */
+void gamelogic_clear_terminal();
+
 #endif // GAME_LOGIC_H

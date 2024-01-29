@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <stdlib.h>
 #include "logs.h"
 #include "game_logic.h"
 #include "event.h"
@@ -76,4 +77,13 @@ GameRet gamelogic_terminate_game() {
 
     /* TBD: return success for now */
     return RET_SUCCESS;
+}
+
+void gamelogic_clear_terminal() {
+#ifdef LINUX
+    system("clear");
+#else
+    /* untested */
+    system("cls");
+#endif
 }

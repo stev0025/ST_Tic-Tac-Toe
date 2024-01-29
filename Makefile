@@ -13,6 +13,15 @@ OBJECTS := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SOURCES))
 
 .PHONY: all clean directories launch_script
 
+# Check the OS
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+    OS = LINUX
+endif
+ifeq ($(UNAME_S),Windows_NT)
+    OS = WINDOWS
+endif
+
 # Add 'directories' and 'launch_script' as a prerequisite to the 'all' target
 all: directories launch_script $(TARGET)
 
@@ -44,7 +53,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@echo "#######################"
 	@echo "Compiling $<"
 	@echo "#######################"
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -D$(OS) $(CFLAGS) -c $< -o $@
 
 clean:
 	@echo "#######################"

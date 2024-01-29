@@ -129,6 +129,8 @@ GameRet sm_state_current_set(States state) {
 }
 
 static GameRet sm_handle_init() {
+    gamelogic_clear_terminal();
+
     render_welcome_message();
 
     /* TBD: scanf for user input, then continue */
