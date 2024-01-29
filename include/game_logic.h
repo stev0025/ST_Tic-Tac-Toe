@@ -28,6 +28,7 @@ typedef enum {
  * - Set next event into EVENT_START_PROGRAM
  * - Set current state into STATE_NONE
  * - Set current player turn to be player X
+ * - Set current score to 0:0
  */
 GameRet gamelogic_initialize_game();
 
@@ -44,12 +45,12 @@ GameRet gamelogic_is_game_running(bool *running);
 /**
  * @brief get current Tic-Tac-Toe board
  */
-GameRet gamelogic_current_board_get(char **board);
+char (*gamelogic_current_board_get(void))[BOARD_SIZE];
 
 /**
  * @brief get current score
  */
-GameRet gamelogic_score_get(int score[2]);
+GameRet gamelogic_score_get(int *scores);
 
 /**
  * @brief get current player turn

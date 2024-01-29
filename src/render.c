@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <stdbool.h>
 #include <string.h>
@@ -31,28 +32,27 @@ static void render_center_text(char* text, int totalWidth) {
  */
 static GameRet render_gameboard_board() {
     GameRet ret = RET_SUCCESS;
-    char **board;
 
     /* get current Tic-Tac-Toe board */
-    ret = gamelogic_current_board_get(board);
-    if (ret != RET_SUCCESS) {
-        log_message(LOG_ERROR, "Failed render_gameboard_board():gamelogic_current_board_get()");
-        return ret;
-    }
+    char (*board)[BOARD_SIZE] = gamelogic_current_board_get();
 
     /* draw board */
     for (int row = 0; row < BOARD_SIZE; row++) {
+        printf("   ");
         for (int col = 0; col < BOARD_SIZE; col++) {
             printf(" %c ", board[row][col]);
             if (col < 2) {
                 printf("|");
             }
         }
+
         printf("\n");
+        printf("   ");
         if (row < 2) {
             printf("---+---+---\n");
         }
     }
+    printf("\n");
 
     return RET_SUCCESS;
 }
@@ -73,6 +73,7 @@ GameRet render_gameboard() {
     printf("X   X        OOO \n");
     printf("  X   %d : %d O   O\n", score[0], score[1]);
     printf("X   X        OOO \n");
+    printf("\n");
 
     /* render gameboard */
     ret = render_gameboard_board();
@@ -87,7 +88,7 @@ GameRet render_gameboard() {
         log_message(LOG_ERROR, "Failed render_gameboard():gamelogic_player_turn_get()");
         return ret;
     }
-    printf("Current turn:  Player %c", player);
+    printf("Current turn: %c Player\n", player ==PLAYER_TURN_X ? 'X' : 'O' );
 
     return RET_SUCCESS;
 }

@@ -10,8 +10,8 @@
 int main() {
     bool running = true;
     Events next_event = EVENT_LAST;
-    States next_state = STATE_LAST;
     GameRet ret = RET_SUCCESS;
+    int i = 1; // loop count
 
     /* initialize games */
     ret = gamelogic_initialize_game();
@@ -21,30 +21,41 @@ int main() {
     }
 
     while (running) {
+        log_message(LOG_DEBUG, "main(): loop: %d", i);
+
         /* Get Next Event */
         ret = event_next_event_get(&next_event);
         if (ret != RET_SUCCESS) {
             log_message(LOG_WARN, "Failed event_next_event_get()");
         }
 
-        /* Get Next State */
-        ret = sm_state_next_get(next_event, &next_state);
+        /* Get to the Next State */
+        ret = sm_state_next_get(next_event);
         if (ret != RET_SUCCESS) {
             log_message(LOG_WARN, "Failed sm_state_next_get()");
         }
 
-        /* Handle the next State */
-        ret = sm_handler(next_state);
+        /* Handle the State */
+        ret = sm_handler();
         if (ret != RET_SUCCESS) {
             log_message(LOG_WARN, "Failed sm_handler()");
         }
 
         /* Check if the game is still running */
-        // ret = gamelogic_is_game_running(&running);
-        // if (ret != RET_SUCCESS) {
-        //     log_message(LOG_WARN, "Failed gamelogic_is_game_running()");
-        // }
-        running = false; // TBD: just stop it for testing
+        ret = gamelogic_is_game_running(&running);
+        if (ret != RET_SUCCESS) {
+            log_message(LOG_WARN, "Failed gamelogic_is_game_running()");
+        }
+
+        /* DEVELOPMENT: Stop testing at STATE_EMPTY_BOARD */
+        States current_state;
+        sm_state_current_get(&current_state);
+        if (current_state == STATE_EMPTY_BOARD) {
+            running = false;
+        }
+
+        /* DEBUG: increment loop count */
+        i++;
     }
 
     log_message(LOG_INFO, "Exiting game loop.");
