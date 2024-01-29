@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <stdio.h>
 #include "game_logic.h"
 #include "logs.h"
 #include "event.h"
@@ -129,11 +130,17 @@ GameRet sm_state_current_set(States state) {
 }
 
 static GameRet sm_handle_init() {
+    char user_in;
+
+    /* clear terminal */
     gamelogic_clear_terminal();
 
+    /* print out welcome message that prompt user input*/
     render_welcome_message();
 
-    /* TBD: scanf for user input, then continue */
+    /* wait for any input before continuing */
+    scanf("%c", &user_in);
+
     return RET_SUCCESS;
 }
 
