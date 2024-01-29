@@ -1,5 +1,7 @@
 #include <stdbool.h>
+#include <stdio.h>
 #include "game_logic.h"
+#include "logs.h"
 #include "event.h"
 #include "state_machine.h"
 #include "render.h"
@@ -106,13 +108,14 @@ GameRet sm_handler(States state) {
             return sm_handle_end_game();
             break;
         default:
-            /* TBD: print error, then return fail */
+            log_message(LOG_ERROR, "sm_handler(): hit non-functioning state: %d", state);
             return RET_SM_FAIL;
     }
 }
 
 GameRet sm_state_next_get(Events ev, States *next_state) {
-    /* TBD: use sm_state_transition() to get the next state */
+    *next_state = sm_state_transition[sm_state][ev];
+
     return RET_SUCCESS;
 }
 
@@ -127,9 +130,17 @@ GameRet sm_state_current_set(States state) {
 }
 
 static GameRet sm_handle_init() {
+    char user_in;
+
+    /* clear terminal */
+    gamelogic_clear_terminal();
+
+    /* print out welcome message that prompt user input*/
     render_welcome_message();
 
-    /* TBD: scanf for user input, then continue */
+    /* wait for any input before continuing */
+    scanf("%c", &user_in);
+
     return RET_SUCCESS;
 }
 

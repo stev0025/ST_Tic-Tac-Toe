@@ -17,6 +17,7 @@ typedef enum {
     RET_EVENT_FAIL,
     RET_SM_FAIL,
     RET_GL_FAIL,
+    RET_REND_FAIL,
     RET_LAST
 } GameRet;
 
@@ -54,5 +55,10 @@ GameRet gamelogic_score_get(int score[2]);
  * @brief get current player turn
  */
 GameRet gamelogic_player_turn_get(PlayerTurn *player);
+
+/**
+ * @brief Clear terminal
+ */
+void gamelogic_clear_terminal();
 
 #endif // GAME_LOGIC_H

@@ -140,7 +140,6 @@ ST_Tic-Tac-Toe
 |   |-- state_machine.h
 |   |-- render.h
 |   |-- state_machine.h
-|   |-- user_input.h
 |-- src/
 |   |-- event.c
 |   |-- game_logic.c
@@ -148,7 +147,6 @@ ST_Tic-Tac-Toe
 |   |-- main.c
 |   |-- render.c
 |   |-- state_machine.c
-|   |-- user_input.c
 |-- README.md
 ```
 

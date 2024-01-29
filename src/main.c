@@ -14,32 +14,35 @@ int main() {
     GameRet ret = RET_SUCCESS;
 
     /* initialize games */
-    gamelogic_initialize_game();
-    /* TBD: error handling */
+    ret = gamelogic_initialize_game();
+    if (ret != RET_SUCCESS) {
+        log_message(LOG_ERROR, "Failed gamelogic_initialize_game()");
+        return 0;
+    }
 
     while (running) {
         /* Get Next Event */
         ret = event_next_event_get(&next_event);
         if (ret != RET_SUCCESS) {
-            /* TBD: error handling */
+            log_message(LOG_WARN, "Failed event_next_event_get()");
         }
 
         /* Get Next State */
         ret = sm_state_next_get(next_event, &next_state);
         if (ret != RET_SUCCESS) {
-            /* TBD: error handling */
+            log_message(LOG_WARN, "Failed sm_state_next_get()");
         }
 
         /* Handle the next State */
         ret = sm_handler(next_state);
         if (ret != RET_SUCCESS) {
-            /* TBD: error handling */
+            log_message(LOG_WARN, "Failed sm_handler()");
         }
 
         /* Check if the game is still running */
         // ret = gamelogic_is_game_running(&running);
         // if (ret != RET_SUCCESS) {
-        //     /* TBD: error handling */
+        //     log_message(LOG_WARN, "Failed gamelogic_is_game_running()");
         // }
         running = false; // TBD: just stop it for testing
     }
@@ -49,7 +52,7 @@ int main() {
     /* terminate the game */
     ret = gamelogic_terminate_game();
     if (ret != RET_SUCCESS) {
-        /* TBD: error handling */
+        log_message(LOG_ERROR, "Failed gamelogic_terminate_game()");
     }
 
     return 0;
