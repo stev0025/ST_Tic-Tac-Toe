@@ -52,17 +52,20 @@ GameRet gamelogic_initialize_game() {
 
     ret = event_set_next_event(EVENT_START_PROGRAM);
     if (ret != RET_SUCCESS) {
-        /* TBD: error catcher */
+        log_message(LOG_ERROR, "Failed event_set_next_event()");
+        return RET_GL_FAIL;
     };
 
     ret = sm_state_current_set(STATE_NONE);
     if (ret != RET_SUCCESS) {
-        /* TBD: error catcher */
+        log_message(LOG_ERROR, "Failed sm_state_current_set()");
+        return RET_GL_FAIL;
     };
 
     ret = gamelogic_player_turn_set(PLAYER_TURN_X);
     if (ret != RET_SUCCESS) {
-        /* TBD: error catcher */
+        log_message(LOG_ERROR, "Failed gamelogic_player_turn_set()");
+        return RET_GL_FAIL;
     };
 
     return RET_SUCCESS;
