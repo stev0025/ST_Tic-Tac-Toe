@@ -15,6 +15,7 @@ static GameRet sm_handle_empty_board();
 static GameRet sm_handle_player_turn();
 static GameRet sm_handle_check_win();
 static GameRet sm_handle_end_game();
+static GameRet sm_handle_error();
 
 /* state transition table, based on current state & incoming event */
 States sm_state_transition[STATE_LAST][EVENT_LAST] = {
@@ -109,7 +110,7 @@ GameRet sm_handler() {
             break;
         default:
             log_message(LOG_ERROR, "sm_handler(): hit non-functioning state: %d", sm_state);
-            return RET_SM_FAIL;
+            return sm_handle_error();
     }
 }
 
@@ -151,9 +152,9 @@ static GameRet sm_handle_init() {
     scanf("%c", &user_in);
 
     /* Set next event to EVENT_START_GAME */
-    ret = event_set_next_event(EVENT_START_GAME);
+    ret = event_next_event_set(EVENT_START_GAME);
     if (ret != RET_SUCCESS) {
-        log_message(LOG_ERROR, "failed sm_handle_init():event_set_next_event()");
+        log_message(LOG_ERROR, "failed sm_handle_init():event_next_event_set()");
         return ret;
     }
 
@@ -175,20 +176,45 @@ static GameRet sm_handle_empty_board() {
         return ret;
     };
 
+    /* Set next event to EVENT_FIRST_PLAYER_ACTION */
+    ret = event_next_event_set(EVENT_FIRST_PLAYER_ACTION);
+    if (ret != RET_SUCCESS) {
+        log_message(LOG_ERROR, "failed sm_handle_empty_board():event_next_event_set()");
+        return ret;
+    }
+
     return RET_SUCCESS;
 }
 
 static GameRet sm_handle_player_turn() {
+    log_message(LOG_DEBUG, "sm_handle_player_turn(): enter");
+
     /* TBD */
     return RET_SUCCESS;
 }
 
 static GameRet sm_handle_check_win() {
+    log_message(LOG_DEBUG, "sm_handle_check_win(): enter");
+
     /* TBD */
     return RET_SUCCESS;
 }
 
 static GameRet sm_handle_end_game() {
+    log_message(LOG_DEBUG, "sm_handle_end_game(): enter");
+
     /* TBD */
+    return RET_SUCCESS;
+}
+
+/**
+ * @brief handler for error or non-functioning states
+ */
+static GameRet sm_handle_error() {
+    log_message(LOG_DEBUG, "sm_handle_error(): enter");
+
+    /* stop main loop runner */
+    gamelogic_game_running_set(false);
+
     return RET_SUCCESS;
 }

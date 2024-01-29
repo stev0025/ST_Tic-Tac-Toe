@@ -5,6 +5,9 @@
 #include "event.h"
 #include "state_machine.h"
 
+/* Variable to control the loop's execution */
+bool run_loop = true;
+
 /* Scores for players X and Y */
 static int gamelogic_score[2];
 
@@ -38,9 +41,15 @@ GameRet gamelogic_player_turn_get(PlayerTurn *player) {
     return RET_SUCCESS;
 }
 
-GameRet gamelogic_is_game_running(bool *running) {
-    /* TBD: return running for now */
-    *running = true;
+GameRet gamelogic_game_running_set(bool running) {
+    run_loop = running;
+
+    return RET_SUCCESS;
+}
+
+GameRet gamelogic_game_running_get(bool *running) {
+    *running = run_loop;
+
     return RET_SUCCESS;
 }
 
@@ -51,9 +60,9 @@ GameRet gamelogic_initialize_game() {
 
     log_message(LOG_INFO, "Starting game initialization.");
 
-    ret = event_set_next_event(EVENT_START_PROGRAM);
+    ret = event_next_event_set(EVENT_START_PROGRAM);
     if (ret != RET_SUCCESS) {
-        log_message(LOG_ERROR, "Failed event_set_next_event()");
+        log_message(LOG_ERROR, "Failed event_next_event_set()");
         return RET_GL_FAIL;
     };
 

@@ -22,6 +22,6 @@ GameRet event_next_event_get(Events *ev);
 /**
  * @brief set the next event
  */
-GameRet event_set_next_event(Events event);
+GameRet event_next_event_set(Events event);
 
 #endif // EVENT_H
