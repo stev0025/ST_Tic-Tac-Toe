@@ -13,6 +13,16 @@ typedef enum {
   STATE_LAST
 } States;
 
+/* string representation for enum States */
+#define STR_STATE_NONE "STATE_NONE"
+#define STR_STATE_INIT "STATE_INIT"
+#define STR_STATE_EMPTY_BOARD "STATE_EMPTY_BOARD"
+#define STR_STATE_PLAYER_TURN "STATE_PLAYER_TURN"
+#define STR_STATE_CHECK_WIN "STATE_CHECK_WIN"
+#define STR_STATE_END_GAME "STATE_END_GAME"
+#define STR_STATE_ERROR "STATE_ERROR"
+#define STR_STATE_LAST "STATE_LAST"
+
 /**
  * @brief Handle the current state
  * 

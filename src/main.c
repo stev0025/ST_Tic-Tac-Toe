@@ -2,10 +2,10 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
-#include "logs.h"
 #include "game_logic.h"
 #include "event.h"
 #include "state_machine.h"
+#include "logs.h"
 
 int main() {
     bool running = true;

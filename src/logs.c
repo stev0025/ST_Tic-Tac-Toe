@@ -2,7 +2,11 @@
 #include <stdarg.h>
 #include <pthread.h>
 #include <string.h>
+#include <stdbool.h>
 #include <time.h>
+#include "game_logic.h"
+#include "event.h"
+#include "state_machine.h"
 #include "logs.h"
 
 static FILE *log_file;
@@ -80,5 +84,32 @@ void log_cleanup() {
     if (fclose(log_file) != 0) {
         perror("Error closing log file");
         // handle error appropriately
+    }
+}
+
+const char* log_enum_to_str_states(States state) {
+    switch (state) {
+        case STATE_NONE:        return STR_STATE_NONE;
+        case STATE_INIT:        return STR_STATE_INIT;
+        case STATE_EMPTY_BOARD: return STR_STATE_EMPTY_BOARD;
+        case STATE_PLAYER_TURN: return STR_STATE_PLAYER_TURN;
+        case STATE_CHECK_WIN:   return STR_STATE_CHECK_WIN;
+        case STATE_END_GAME:    return STR_STATE_END_GAME;
+        case STATE_ERROR:       return STR_STATE_ERROR;
+        default:                return STR_STATE_LAST;
+    }
+}
+
+const char* log_enum_to_str_events(Events event) {
+    switch (event) {
+        case EVENT_START_PROGRAM:       return STR_EVENT_START_PROGRAM;
+        case EVENT_START_GAME:          return STR_EVENT_START_GAME;
+        case EVENT_FIRST_PLAYER_ACTION: return STR_EVENT_FIRST_PLAYER_ACTION;
+        case EVENT_PLAYER_FILLED_IN:    return STR_EVENT_PLAYER_FILLED_IN;
+        case EVENT_PLAYER_NEXT_TURN:    return STR_EVENT_PLAYER_NEXT_TURN;
+        case EVENT_WINNER_ANNOUNCE:     return STR_EVENT_WINNER_ANNOUNCE;
+        case EVENT_END_GAME:            return STR_EVENT_END_GAME;
+        case EVENT_RESTART:             return STR_EVENT_RESTART;
+        default:                        return STR_EVENT_LAST;
     }
 }

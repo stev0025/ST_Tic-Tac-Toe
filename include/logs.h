@@ -22,4 +22,14 @@ void log_message(int log_level, const char *format, ...);
  */
 void log_cleanup();
 
+/**
+ * @brief enum to string translations for enum States
+ */
+const char* log_enum_to_str_states(States state);
+
+/**
+ * @brief enum to string translations for enum Events
+ */
+const char* log_enum_to_str_events(Events event);
+
 #endif // LOGS_H
