@@ -1,9 +1,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include "game_logic.h"
-#include "logs.h"
 #include "event.h"
 #include "state_machine.h"
+#include "logs.h"
 #include "render.h"
 
 /* current state of the program */
@@ -109,19 +109,19 @@ GameRet sm_handler() {
             return sm_handle_end_game();
             break;
         default:
-            log_message(LOG_ERROR, "sm_handler(): hit non-functioning state: %d", sm_state);
+            log_message(LOG_ERROR, "sm_handler(): hit non-functioning state: %s", log_enum_to_str_states(sm_state));
             return sm_handle_error();
     }
 }
 
 GameRet sm_state_next_get(Events ev) {
-    log_message(LOG_DEBUG, "sm_state_next_get(): current state: %d", sm_state);
-    log_message(LOG_DEBUG, "sm_state_next_get(): current event: %d", ev);
+    log_message(LOG_DEBUG, "sm_state_next_get(): current state: %s", log_enum_to_str_states(sm_state));
+    log_message(LOG_DEBUG, "sm_state_next_get(): current event: %s", log_enum_to_str_events(ev));
 
     /* Transition to next state */
     sm_state = sm_state_transition[sm_state][ev];
 
-    log_message(LOG_DEBUG, "sm_state_next_get(): next state: %d", sm_state);
+    log_message(LOG_DEBUG, "sm_state_next_get(): next state   : %s", log_enum_to_str_states(sm_state));
 
     return RET_SUCCESS;
 }

@@ -1,9 +1,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
-#include "logs.h"
 #include "game_logic.h"
 #include "event.h"
 #include "state_machine.h"
+#include "logs.h"
 
 /* Variable to control the loop's execution */
 bool run_loop = true;

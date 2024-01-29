@@ -3,9 +3,11 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <string.h>
-#include "logs.h"
 #include "game_logic.h"
+#include "event.h"
+#include "state_machine.h"
 #include "render.h"
+#include "logs.h"
 
 /**
  * @brief center text by adding padding based on total width
