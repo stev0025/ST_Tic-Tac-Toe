@@ -18,14 +18,14 @@ char gamelogic_current_board[BOARD_SIZE][BOARD_SIZE] = {
     {' ', ' ', ' '}
 };
 
-GameRet gamelogic_current_board_get(char **board) {
-    // TBD;
-    return RET_LAST;
+char (*gamelogic_current_board_get(void))[BOARD_SIZE] {
+    return gamelogic_current_board;
 }
 
-GameRet gamelogic_score_get(int score[2]) {
-    // TBD;
-    return RET_LAST;
+GameRet gamelogic_score_get(int *scores) {
+    scores[0] = gamelogic_score[0];
+    scores[1] = gamelogic_score[1];
+    return RET_SUCCESS;
 }
 
 GameRet gamelogic_player_turn_set(PlayerTurn player) {
@@ -68,6 +68,9 @@ GameRet gamelogic_initialize_game() {
         log_message(LOG_ERROR, "Failed gamelogic_player_turn_set()");
         return RET_GL_FAIL;
     };
+
+    gamelogic_score[0] = 0;
+    gamelogic_score[1] = 0;
 
     return RET_SUCCESS;
 }

@@ -14,18 +14,16 @@ typedef enum {
 } States;
 
 /**
- * @brief TBD
- * 
- * TBD: explain
+ * @brief Handle the current state
  * 
  * @param TBD
  */
-GameRet sm_handler(States state);
+GameRet sm_handler();
 
 /**
  * @brief Get the next state based on the event
  */
-GameRet sm_state_next_get(Events ev, States *next_state);
+GameRet sm_state_next_get(Events ev);
 
 /**
  * @brief Get the current state

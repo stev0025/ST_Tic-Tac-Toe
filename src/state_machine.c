@@ -90,8 +90,8 @@ States sm_state_transition[STATE_LAST][EVENT_LAST] = {
     }
 };
 
-GameRet sm_handler(States state) {
-    switch (state) {
+GameRet sm_handler() {
+    switch (sm_state) {
         case STATE_INIT:
             return sm_handle_init();
             break;
@@ -108,13 +108,19 @@ GameRet sm_handler(States state) {
             return sm_handle_end_game();
             break;
         default:
-            log_message(LOG_ERROR, "sm_handler(): hit non-functioning state: %d", state);
+            log_message(LOG_ERROR, "sm_handler(): hit non-functioning state: %d", sm_state);
             return RET_SM_FAIL;
     }
 }
 
-GameRet sm_state_next_get(Events ev, States *next_state) {
-    *next_state = sm_state_transition[sm_state][ev];
+GameRet sm_state_next_get(Events ev) {
+    log_message(LOG_DEBUG, "sm_state_next_get(): current state: %d", sm_state);
+    log_message(LOG_DEBUG, "sm_state_next_get(): current event: %d", ev);
+
+    /* Transition to next state */
+    sm_state = sm_state_transition[sm_state][ev];
+
+    log_message(LOG_DEBUG, "sm_state_next_get(): next state: %d", sm_state);
 
     return RET_SUCCESS;
 }
@@ -130,7 +136,10 @@ GameRet sm_state_current_set(States state) {
 }
 
 static GameRet sm_handle_init() {
+    GameRet ret = RET_LAST;
     char user_in;
+
+    log_message(LOG_DEBUG, "sm_handle_init(): enter");
 
     /* clear terminal */
     gamelogic_clear_terminal();
@@ -141,11 +150,31 @@ static GameRet sm_handle_init() {
     /* wait for any input before continuing */
     scanf("%c", &user_in);
 
+    /* Set next event to EVENT_START_GAME */
+    ret = event_set_next_event(EVENT_START_GAME);
+    if (ret != RET_SUCCESS) {
+        log_message(LOG_ERROR, "failed sm_handle_init():event_set_next_event()");
+        return ret;
+    }
+
     return RET_SUCCESS;
 }
 
 static GameRet sm_handle_empty_board() {
-    /* TBD */
+    GameRet ret = RET_LAST;
+
+    log_message(LOG_DEBUG, "sm_handle_empty_board(): enter");
+
+    /* clear terminal */
+    gamelogic_clear_terminal();
+
+    /* render overall empty gameboard */
+    ret = render_gameboard();
+    if (ret != RET_SUCCESS) {
+        log_message(LOG_ERROR, "Failed sm_handle_empty_board():render_gameboard()");
+        return ret;
+    };
+
     return RET_SUCCESS;
 }
 
