@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <string.h>
+#include "logs.h"
 #include "game_logic.h"
 #include "render.h"
 
@@ -28,11 +29,16 @@ static void render_center_text(char* text, int totalWidth) {
  * ---+---+---
  *  O | X |   
  */
-static void render_gameboard_board() {
+static GameRet render_gameboard_board() {
+    GameRet ret = RET_SUCCESS;
     char **board;
 
     /* get current Tic-Tac-Toe board */
-    gamelogic_current_board_get(board);
+    ret = gamelogic_current_board_get(board);
+    if (ret != RET_SUCCESS) {
+        log_message(LOG_ERROR, "Failed render_gameboard_board():gamelogic_current_board_get()");
+        return ret;
+    }
 
     /* draw board */
     for (int row = 0; row < BOARD_SIZE; row++) {
@@ -47,14 +53,21 @@ static void render_gameboard_board() {
             printf("---+---+---\n");
         }
     }
+
+    return RET_SUCCESS;
 }
 
-void render_gameboard() {
+GameRet render_gameboard() {
+    GameRet ret = RET_SUCCESS;
     int score[2];
     PlayerTurn player;
 
     /* get current score */
-    gamelogic_score_get(score);
+    ret = gamelogic_score_get(score);
+    if (ret != RET_SUCCESS) {
+        log_message(LOG_ERROR, "Failed render_gameboard():gamelogic_score_get()");
+        return ret;
+    }
 
     /* print score */
     printf("X   X        OOO \n");
@@ -62,13 +75,21 @@ void render_gameboard() {
     printf("X   X        OOO \n");
 
     /* render gameboard */
-    render_gameboard();
+    ret = render_gameboard_board();
+    if (ret != RET_SUCCESS) {
+        log_message(LOG_ERROR, "Failed render_gameboard():render_gameboard_board()");
+        return ret;
+    }
 
     /* mention the player to play the current turn */
-    gamelogic_player_turn_get(&player);
+    ret = gamelogic_player_turn_get(&player);
+    if (ret != RET_SUCCESS) {
+        log_message(LOG_ERROR, "Failed render_gameboard():gamelogic_player_turn_get()");
+        return ret;
+    }
     printf("Current turn:  Player %c", player);
 
-    return;
+    return RET_SUCCESS;
 }
 
 void render_welcome_message() {

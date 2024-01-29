@@ -17,6 +17,7 @@ typedef enum {
     RET_EVENT_FAIL,
     RET_SM_FAIL,
     RET_GL_FAIL,
+    RET_REND_FAIL,
     RET_LAST
 } GameRet;
 
