@@ -12,7 +12,7 @@ GameRet event_next_event_get(Events *ev) {
   return RET_SUCCESS;
 }
 
-GameRet event_set_next_event(Events event) {
+GameRet event_next_event_set(Events event) {
   next_event = event;
 
   return RET_SUCCESS;

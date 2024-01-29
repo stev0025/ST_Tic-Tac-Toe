@@ -42,16 +42,9 @@ int main() {
         }
 
         /* Check if the game is still running */
-        ret = gamelogic_is_game_running(&running);
+        ret = gamelogic_game_running_get(&running);
         if (ret != RET_SUCCESS) {
-            log_message(LOG_WARN, "Failed gamelogic_is_game_running()");
-        }
-
-        /* DEVELOPMENT: Stop testing at STATE_EMPTY_BOARD */
-        States current_state;
-        sm_state_current_get(&current_state);
-        if (current_state == STATE_EMPTY_BOARD) {
-            running = false;
+            log_message(LOG_WARN, "Failed gamelogic_game_running_get()");
         }
 
         /* DEBUG: increment loop count */

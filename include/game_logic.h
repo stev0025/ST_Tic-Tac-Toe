@@ -38,9 +38,14 @@ GameRet gamelogic_initialize_game();
 GameRet gamelogic_terminate_game();
 
 /**
- * @brief check if game is still running
+ * @brief set game running flag
  */
-GameRet gamelogic_is_game_running(bool *running);
+GameRet gamelogic_game_running_set(bool running);
+
+/**
+ * @brief get game running flag
+ */
+GameRet gamelogic_game_running_get(bool *running);
 
 /**
  * @brief get current Tic-Tac-Toe board
