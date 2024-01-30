@@ -25,6 +25,17 @@ char (*gamelogic_current_board_get(void))[BOARD_SIZE] {
     return gamelogic_current_board;
 }
 
+void gamelogic_board_fill_cell(PlayerTurn player, int row, int col) {
+    /* TBD: use switch-case for variable answer */
+    char answer = (player == PLAYER_TURN_X ? 'X' : 'O');
+
+    /* TBD: input validation for row & col */
+
+    gamelogic_current_board[row][col] = answer;
+
+    return;
+}
+
 GameRet gamelogic_score_get(int *scores) {
     scores[0] = gamelogic_score[0];
     scores[1] = gamelogic_score[1];

@@ -53,6 +53,11 @@ GameRet gamelogic_game_running_get(bool *running);
 char (*gamelogic_current_board_get(void))[BOARD_SIZE];
 
 /**
+ * @brief fill a cell in the Tic-Tac-Toe board
+ */
+void gamelogic_board_fill_cell(PlayerTurn player, int row, int col);
+
+/**
  * @brief get current score
  */
 GameRet gamelogic_score_get(int *scores);
