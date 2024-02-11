@@ -58,6 +58,14 @@ char (*gamelogic_board_get(void))[BOARD_SIZE];
 void gamelogic_board_fill_cell(PlayerTurn player, int row, int col);
 
 /**
+ * @brief check if there is already a winner
+ * 
+ * Only check a 3x3 board
+ * Assume there are only 3 different chars: 'X', 'O', ' '
+ */
+char gamelogic_board_check_win();
+
+/**
  * @brief get current score
  */
 GameRet gamelogic_score_get(int *scores);
