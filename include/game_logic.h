@@ -66,12 +66,17 @@ void gamelogic_board_fill_cell(PlayerTurn player, int row, int col);
 char gamelogic_board_check_win();
 
 /**
- * @brief get current score
+ * @brief get score
  */
 GameRet gamelogic_score_get(int *scores);
 
 /**
- * @brief get current player turn
+ * @brief set player turn
+ */
+GameRet gamelogic_player_turn_set(PlayerTurn player);
+
+/**
+ * @brief get player turn
  */
 GameRet gamelogic_player_turn_get(PlayerTurn *player);
 

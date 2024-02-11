@@ -256,9 +256,44 @@ static GameRet sm_handle_player_turn() {
 }
 
 static GameRet sm_handle_check_win() {
+    GameRet ret = RET_LAST;
+    bool found_winner = false;
+
     log_message(LOG_DEBUG, "sm_handle_check_win(): enter");
 
-    /* TBD */
+    /* 1. check if the winner is decided */
+    char winner = gamelogic_board_check_win();
+    if (winner != ' ') {
+        found_winner = true;
+    }
+
+    if (found_winner) {
+        /* 2.1. winner is found. End the game */
+        log_message(LOG_DEBUG, "sm_handle_check_win(): winner is found: %c", winner);
+
+        /* Set next event to EVENT_WINNER_ANNOUNCE */
+        ret = event_next_event_set(EVENT_WINNER_ANNOUNCE);
+        if (ret != RET_SUCCESS) {
+            log_message(LOG_ERROR, "failed sm_handle_check_win():event_next_event_set()");
+            return ret;
+        }
+    } else {
+        /* 2.2. winner is not yet decided. continue to the next turn */
+        log_message(LOG_DEBUG, "sm_handle_check_win(): continue to the next player");
+
+        /* set the next player */
+        PlayerTurn player;
+        gamelogic_player_turn_get(&player);
+        gamelogic_player_turn_set(player ^ 1); // Note: between 0 ('X') or 1 ('O')
+
+        /* Set next event to EVENT_PLAYER_NEXT_TURN */
+        ret = event_next_event_set(EVENT_PLAYER_NEXT_TURN);
+        if (ret != RET_SUCCESS) {
+            log_message(LOG_ERROR, "failed sm_handle_check_win():event_next_event_set()");
+            return ret;
+        }
+    }
+
     return RET_SUCCESS;
 }
 
