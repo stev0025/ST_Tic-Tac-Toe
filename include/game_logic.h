@@ -50,7 +50,7 @@ GameRet gamelogic_game_running_get(bool *running);
 /**
  * @brief get current Tic-Tac-Toe board
  */
-char (*gamelogic_current_board_get(void))[BOARD_SIZE];
+char (*gamelogic_board_get(void))[BOARD_SIZE];
 
 /**
  * @brief fill a cell in the Tic-Tac-Toe board
