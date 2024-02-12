@@ -50,7 +50,7 @@ GameRet gamelogic_game_running_get(bool *running);
 /**
  * @brief get current Tic-Tac-Toe board
  */
-char (*gamelogic_current_board_get(void))[BOARD_SIZE];
+char (*gamelogic_board_get(void))[BOARD_SIZE];
 
 /**
  * @brief fill a cell in the Tic-Tac-Toe board
@@ -58,12 +58,25 @@ char (*gamelogic_current_board_get(void))[BOARD_SIZE];
 void gamelogic_board_fill_cell(PlayerTurn player, int row, int col);
 
 /**
- * @brief get current score
+ * @brief check if there is already a winner
+ * 
+ * Only check a 3x3 board
+ * Assume there are only 3 different chars: 'X', 'O', ' '
+ */
+char gamelogic_board_check_win();
+
+/**
+ * @brief get score
  */
 GameRet gamelogic_score_get(int *scores);
 
 /**
- * @brief get current player turn
+ * @brief set player turn
+ */
+GameRet gamelogic_player_turn_set(PlayerTurn player);
+
+/**
+ * @brief get player turn
  */
 GameRet gamelogic_player_turn_get(PlayerTurn *player);
 

@@ -36,7 +36,7 @@ static GameRet render_gameboard_board() {
     GameRet ret = RET_SUCCESS;
 
     /* get current Tic-Tac-Toe board */
-    char (*board)[BOARD_SIZE] = gamelogic_current_board_get();
+    char (*board)[BOARD_SIZE] = gamelogic_board_get();
 
     /* draw board */
     for (int row = 0; row < BOARD_SIZE; row++) {

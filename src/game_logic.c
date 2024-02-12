@@ -15,14 +15,14 @@ static int gamelogic_score[2];
 PlayerTurn player_turn = PLAYER_LAST;
 
 /* TicTacToe board */
-char gamelogic_current_board[BOARD_SIZE][BOARD_SIZE] = {
+char gamelogic_board[BOARD_SIZE][BOARD_SIZE] = {
     {' ', ' ', ' '},
     {' ', ' ', ' '},
     {' ', ' ', ' '}
 };
 
-char (*gamelogic_current_board_get(void))[BOARD_SIZE] {
-    return gamelogic_current_board;
+char (*gamelogic_board_get(void))[BOARD_SIZE] {
+    return gamelogic_board;
 }
 
 void gamelogic_board_fill_cell(PlayerTurn player, int row, int col) {
@@ -31,9 +31,40 @@ void gamelogic_board_fill_cell(PlayerTurn player, int row, int col) {
 
     /* TBD: input validation for row & col */
 
-    gamelogic_current_board[row][col] = answer;
+    gamelogic_board[row][col] = answer;
 
     return;
+}
+
+char gamelogic_board_check_win() {
+    /* Check horizontal and vertical lines */
+    for(int i = 0; i < 3; i++) {
+        if(gamelogic_board[i][0] == gamelogic_board[i][1] &&
+           gamelogic_board[i][1] == gamelogic_board[i][2] &&
+           gamelogic_board[i][0] != ' ') {
+            return gamelogic_board[i][0];
+        }
+        if(gamelogic_board[0][i] == gamelogic_board[1][i] &&
+           gamelogic_board[1][i] == gamelogic_board[2][i] &&
+           gamelogic_board[0][i] != ' ') {
+            return gamelogic_board[0][i];
+        }
+    }
+
+    /* Check diagonals */
+    if(gamelogic_board[0][0] == gamelogic_board[1][1] &&
+       gamelogic_board[1][1] == gamelogic_board[2][2] &&
+       gamelogic_board[0][0] != ' ') {
+        return gamelogic_board[0][0];
+    }
+    if(gamelogic_board[0][2] == gamelogic_board[1][1] &&
+       gamelogic_board[1][1] == gamelogic_board[2][0] &&
+       gamelogic_board[0][2] != ' ') {
+        return gamelogic_board[0][2];
+    }
+
+    // No winner
+    return ' ';
 }
 
 GameRet gamelogic_score_get(int *scores) {
