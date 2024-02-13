@@ -221,14 +221,24 @@ static GameRet sm_handle_player_turn() {
         printf("Please fill in the col (0 to 2):");
         scanf("%d", &col);
 
-        /* validate the user input */
-        if (row < 0 && row > 2 && col < 0 && col > 2) {
+        /* validate the user input: out-of-bound */
+        if (row < 0 || row > 2 || col < 0 || col > 2) {
             /* user filled wrongly. loop again */
-            printf("Wrong input");
+            printf("Wrong input: out-of-bound\n");
+            fflush(stdout);
+            log_message(LOG_WARN, "sm_handle_player_turn(): player enters above boundary row:%d col:%d", row, col);
             sleep(2);
             continue;
         }
-        /* TBD: Check if the cell is already occupied */
+        /* validate the user input: occupied cell */
+        if (!gamelogic_board_validate_empty_cell(row, col)) {
+            /* user filled wrongly. loop again */
+            printf("Wrong input: occupied cell\n");
+            fflush(stdout);
+            log_message(LOG_WARN, "sm_handle_player_turn(): player enters occupied cell row:%d col:%d", row, col);
+            sleep(2);
+            continue;
+        }
 
         /* fill in the cell */
         gamelogic_board_fill_cell(player, row, col);

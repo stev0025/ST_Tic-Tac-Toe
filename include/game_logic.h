@@ -58,6 +58,11 @@ char (*gamelogic_board_get(void))[BOARD_SIZE];
 void gamelogic_board_fill_cell(PlayerTurn player, int row, int col);
 
 /**
+ * @brief valdiate the cell is empty
+ */
+bool gamelogic_board_validate_empty_cell(int row, int col);
+
+/**
  * @brief check if there is already a winner
  * 
  * Only check a 3x3 board

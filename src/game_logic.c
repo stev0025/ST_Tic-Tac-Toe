@@ -29,11 +29,17 @@ void gamelogic_board_fill_cell(PlayerTurn player, int row, int col) {
     /* TBD: use switch-case for variable answer */
     char answer = (player == PLAYER_TURN_X ? 'X' : 'O');
 
-    /* TBD: input validation for row & col */
-
     gamelogic_board[row][col] = answer;
 
     return;
+}
+
+bool gamelogic_board_validate_empty_cell(int row, int col) {
+    if (gamelogic_board[row][col] == ' ') {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 char gamelogic_board_check_win() {
