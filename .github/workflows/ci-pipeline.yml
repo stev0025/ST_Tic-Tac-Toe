@@ -1,0 +1,38 @@
+name: CI pipeline
+
+on: [push]
+
+jobs:
+  compile-and-build:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    - name: Compile the Code Using Make
+      run: make
+    - name: Upload Compiled Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-output
+        path: |
+          bin/run
+
+  test-and-run:
+    needs: compile-and-build
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    - name: Download Compiled Build Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: build-output
+        path: bin
+    - name: Set Execute Permission and Run Executable
+      run: |
+        pwd
+        ls -l
+        chmod +x bin/run
+        mkdir -p logs
+        cd bin
+        ./run
