@@ -8,7 +8,7 @@
 5. [State Machine](#state-machine)
 6. [Code Structure](#code-structure)
 7. [Architecture](#architecture)
-8. [Action Items](#action-items)
+8. [Docker Container](#docker-container)
 
 ## Introduction
 A simple Tic-Tac-Toe game implemented in C language.
@@ -150,9 +150,9 @@ ST_Tic-Tac-Toe
 |-- README.md
 ```
 
-## Action Items
-- change the StateMachine diagram in README
-- fill in the state machine handlers
-- create the display inside render files
-- create user input validation
-- create logs
+## Docker Container
+A Dockerfile is provided for development environment
+To use the container, please modify the [VARIABLE] as needed:
+1. cd [PROJECT_DIRECTORY]/ST_Tic-Tac-Toe
+2. docker build -t [USERNAME]/dev-env-tictactoe:latest .
+3. docker run -it --name tictactoe_container [IMAGENAME]:[VERSION] /bin/sh
