@@ -21,6 +21,7 @@ Jobs:
 1. linting:
     - Description: formats the C code according to guidelines
     - Trigger: triggered on each push to the repository
+    - Command: lints yourself before pushing to the repository: `find . -iname *.c -o -iname *.h | xargs clang-format -i -style=file`
 2. compile-and-build:
     - Description: compiles the code and builds the project artifacts
     - Trigger: triggered on each push to the repository

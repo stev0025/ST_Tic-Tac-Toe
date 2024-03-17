@@ -24,4 +24,9 @@ GameRet render_gameboard();
  */
 void render_welcome_message();
 
+/**
+ * @brief render the end game message
+ */
+void render_end_game();
+
 #endif // RENDER_H

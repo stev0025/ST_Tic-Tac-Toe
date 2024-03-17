@@ -167,7 +167,7 @@ static GameRet sm_handle_init()
   /* clear terminal */
   gamelogic_clear_terminal();
 
-  /* print out welcome message that prompt user input*/
+  /* print out welcome message that prompt user input */
   render_welcome_message();
 
   /* wait for any input before continuing */
@@ -217,7 +217,7 @@ static GameRet sm_handle_empty_board()
 static GameRet sm_handle_player_turn()
 {
   GameRet ret = RET_LAST;
-  PlayerTurn player;
+  Player player;
 
   log_message(LOG_DEBUG, "sm_handle_player_turn(): enter");
 
@@ -312,22 +312,19 @@ static GameRet sm_handle_player_turn()
 static GameRet sm_handle_check_win()
 {
   GameRet ret = RET_LAST;
-  bool found_winner = false;
 
   log_message(LOG_DEBUG, "sm_handle_check_win(): enter");
 
   /* 1. check if the winner is decided */
-  char winner = gamelogic_board_check_win();
-  if (winner != ' ')
-  {
-    found_winner = true;
-  }
-
-  if (found_winner)
+  Player winner = gamelogic_board_check_win();
+  if (winner != PLAYER_LAST)
   {
     /* 2.1. winner is found. End the game */
     log_message(
-        LOG_DEBUG, "sm_handle_check_win(): winner is found: %c", winner);
+        LOG_DEBUG, "sm_handle_check_win(): winner is found: %d", winner);
+
+    /* increment a score on the winning player */
+    gamelogic_score_add(winner);
 
     /* Set next event to EVENT_WINNER_ANNOUNCE */
     ret = event_next_event_set(EVENT_WINNER_ANNOUNCE);
@@ -345,7 +342,7 @@ static GameRet sm_handle_check_win()
                 "sm_handle_check_win(): continue to the next player");
 
     /* set the next player */
-    PlayerTurn player;
+    Player player;
     gamelogic_player_turn_get(&player);
     gamelogic_player_turn_set(player ^ 1); // Note: between 0 ('X') or 1 ('O')
 
@@ -364,9 +361,39 @@ static GameRet sm_handle_check_win()
 
 static GameRet sm_handle_end_game()
 {
+  GameRet ret = RET_LAST;
+  char user_in;
+
   log_message(LOG_DEBUG, "sm_handle_end_game(): enter");
 
-  /* TBD */
+  /* clear terminal and input buffer */
+  gamelogic_clear_terminal();
+  gamelogic_clear_ip_buffer();
+
+  /* print out end game message that prompt user input */
+  render_end_game();
+
+  /* wait for input before continuing */
+  scanf("%c", &user_in);
+
+  if (user_in == 'Y' || user_in == 'y')
+  {
+    /* restart the game */
+    /* Set next event to EVENT_RESTART */
+    ret = event_next_event_set(EVENT_RESTART);
+    if (ret != RET_SUCCESS)
+    {
+      log_message(LOG_ERROR,
+                  "failed sm_handle_end_game():event_next_event_set()");
+      return ret;
+    }
+  }
+  else
+  {
+    /* terminate the program */
+    gamelogic_game_running_set(false);
+  }
+
   return RET_SUCCESS;
 }
 
