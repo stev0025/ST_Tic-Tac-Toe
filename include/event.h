@@ -2,7 +2,8 @@
 #define EVENT_H
 
 /* list of events */
-typedef enum {
+typedef enum
+{
   EVENT_START_PROGRAM,
   EVENT_START_GAME,
   EVENT_FIRST_PLAYER_ACTION,
@@ -12,7 +13,7 @@ typedef enum {
   EVENT_END_GAME,
   EVENT_RESTART,
   EVENT_LAST
-}Events;
+} Events;
 
 /* string representation for enum Events */
 #define STR_EVENT_START_PROGRAM "EVENT_START_PROGRAM"

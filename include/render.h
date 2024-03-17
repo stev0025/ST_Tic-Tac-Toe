@@ -3,18 +3,18 @@
 
 /**
  * @brief render the whole display of the game board
- * 
-* Below is the example of rendered 3x3 game board:
- * X   X        OOO 
+ *
+ * Below is the example of rendered 3x3 game board:
+ * X   X        OOO
  *   X   3 : 2 O   O
- * X   X        OOO 
- * 
- *     X | O | X 
+ * X   X        OOO
+ *
+ *     X | O | X
  *    ---+---+---
- *       | O |   
+ *       | O |
  *    ---+---+---
- *     O | X |   
- * 
+ *     O | X |
+ *
  * Current turn: Player X
  */
 GameRet render_gameboard();
