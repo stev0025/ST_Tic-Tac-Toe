@@ -87,7 +87,8 @@ void log_cleanup() {
     }
 }
 
-const char* log_enum_to_str_states(States state) {
+// clang-format off
+const char *log_enum_to_str_states(States state) {
     switch (state) {
         case STATE_NONE:        return STR_STATE_NONE;
         case STATE_INIT:        return STR_STATE_INIT;
@@ -100,7 +101,7 @@ const char* log_enum_to_str_states(States state) {
     }
 }
 
-const char* log_enum_to_str_events(Events event) {
+const char *log_enum_to_str_events(Events event) {
     switch (event) {
         case EVENT_START_PROGRAM:       return STR_EVENT_START_PROGRAM;
         case EVENT_START_GAME:          return STR_EVENT_START_GAME;
@@ -113,3 +114,4 @@ const char* log_enum_to_str_events(Events event) {
         default:                        return STR_EVENT_LAST;
     }
 }
+// clang-format on

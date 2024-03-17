@@ -3,8 +3,29 @@ name: CI pipeline
 on: [push]
 
 jobs:
+  linting:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Install clang-format
+        run: sudo apt-get install -y clang-format-14
+
+      - name: Check clang-format version
+        run: clang-format --version
+
+      - name: Check formatting
+        run: |
+          NOT_FORMATTED=$(find . -iname *.c -o -iname *.h | xargs clang-format -style=file -output-replacements-xml | grep "<replacement " || true)
+          if [ ! -z "$NOT_FORMATTED" ]; then
+            echo "Please run following command on your project repository:"
+            echo "find . -iname *.c -o -iname *.h | xargs clang-format -i -style=file"
+            exit 1
+          fi
+
   compile-and-build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
@@ -20,7 +41,7 @@ jobs:
   test-and-run:
     if: false # This job is disabled for now
     needs: compile-and-build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
