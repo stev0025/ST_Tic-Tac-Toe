@@ -10,10 +10,12 @@
 #include "logs.h"
 
 /**
- * @brief center text by adding padding based on total width
+ * @brief center text by adding padding
  */
-static void render_center_text(char *text, int totalWidth)
+static void render_center_text(char *text)
 {
+  int totalWidth = 79;
+
   int len = strlen(text);
   int padding = (totalWidth - len) / 2;
   for (int i = 0; i < padding; i++)
@@ -70,7 +72,7 @@ GameRet render_gameboard()
 {
   GameRet ret = RET_SUCCESS;
   int score[2];
-  PlayerTurn player;
+  Player player;
 
   /* get current score */
   ret = gamelogic_score_get(score);
@@ -103,29 +105,35 @@ GameRet render_gameboard()
                 "Failed render_gameboard():gamelogic_player_turn_get()");
     return ret;
   }
-  printf("Current turn: %c Player\n", player == PLAYER_TURN_X ? 'X' : 'O');
+  printf("Current turn: %c Player\n", player == PLAYER_X ? 'X' : 'O');
 
   return RET_SUCCESS;
 }
 
 void render_welcome_message()
 {
-  int max_width = 79;
-
   /* displaying welcome message */
-  render_center_text("Welcome to Tic-Tac-Toe!", max_width);
+  render_center_text("Welcome to Tic-Tac-Toe!");
   printf("\n");
-  render_center_text("This is a 2-player turn-based game.", max_width);
+  render_center_text("This is a 2-player turn-based game.");
   render_center_text(
-      "Each player will take turns to place either 'X' or 'O' on the board.",
-      max_width);
+      "Each player will take turns to place either 'X' or 'O' on the board.");
   printf("\n");
 
   /* wait before asking for user input */
   sleep(2);
 
   /* displaying message to ask user input */
-  render_center_text("Please click any button to continue", max_width);
+  render_center_text("Please click any button to continue");
+
+  return;
+}
+
+void render_end_game()
+{
+  /* displaying end game message */
+  render_center_text("Game has ended.");
+  render_center_text("Do you wish to continue playing? [Y]");
 
   return;
 }

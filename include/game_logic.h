@@ -7,10 +7,10 @@
 /* Player turn */
 typedef enum
 {
-  PLAYER_TURN_X,
-  PLAYER_TURN_O,
+  PLAYER_X,
+  PLAYER_O,
   PLAYER_LAST
-} PlayerTurn;
+} Player;
 
 /* Generic return type */
 typedef enum
@@ -57,7 +57,7 @@ char (*gamelogic_board_get(void))[BOARD_SIZE];
 /**
  * @brief fill a cell in the Tic-Tac-Toe board
  */
-void gamelogic_board_fill_cell(PlayerTurn player, int row, int col);
+void gamelogic_board_fill_cell(Player player, int row, int col);
 
 /**
  * @brief valdiate the cell is empty
@@ -68,9 +68,8 @@ bool gamelogic_board_validate_empty_cell(int row, int col);
  * @brief check if there is already a winner
  *
  * Only check a 3x3 board
- * Assume there are only 3 different chars: 'X', 'O', ' '
  */
-char gamelogic_board_check_win();
+Player gamelogic_board_check_win();
 
 /**
  * @brief get score
@@ -78,18 +77,28 @@ char gamelogic_board_check_win();
 GameRet gamelogic_score_get(int *scores);
 
 /**
+ * @brief add a winning score
+ */
+GameRet gamelogic_score_add(Player player);
+
+/**
  * @brief set player turn
  */
-GameRet gamelogic_player_turn_set(PlayerTurn player);
+GameRet gamelogic_player_turn_set(Player player);
 
 /**
  * @brief get player turn
  */
-GameRet gamelogic_player_turn_get(PlayerTurn *player);
+GameRet gamelogic_player_turn_get(Player *player);
 
 /**
  * @brief Clear terminal
  */
 void gamelogic_clear_terminal();
+
+/**
+ * @brief Clear input buffer before getting scanf
+ */
+void gamelogic_clear_ip_buffer();
 
 #endif // GAME_LOGIC_H
