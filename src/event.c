@@ -6,13 +6,15 @@
 /* next event to be consumed */
 static Events next_event;
 
-GameRet event_next_event_get(Events *ev) {
+GameRet event_next_event_get(Events *ev)
+{
   *ev = next_event;
 
   return RET_SUCCESS;
 }
 
-GameRet event_next_event_set(Events event) {
+GameRet event_next_event_set(Events event)
+{
   next_event = event;
 
   return RET_SUCCESS;

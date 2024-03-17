@@ -2,7 +2,8 @@
 #define STATE_MACHINE_H
 
 /* list of states */
-typedef enum {
+typedef enum
+{
   STATE_NONE,
   STATE_INIT,
   STATE_EMPTY_BOARD,
@@ -25,7 +26,7 @@ typedef enum {
 
 /**
  * @brief Handle the current state
- * 
+ *
  * @param TBD
  */
 GameRet sm_handler();

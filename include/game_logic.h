@@ -5,20 +5,22 @@
 #define BOARD_SIZE 3
 
 /* Player turn */
-typedef enum {
-    PLAYER_TURN_X,
-    PLAYER_TURN_O,
-    PLAYER_LAST
+typedef enum
+{
+  PLAYER_TURN_X,
+  PLAYER_TURN_O,
+  PLAYER_LAST
 } PlayerTurn;
 
 /* Generic return type */
-typedef enum {
-    RET_SUCCESS,
-    RET_EVENT_FAIL,
-    RET_SM_FAIL,
-    RET_GL_FAIL,
-    RET_REND_FAIL,
-    RET_LAST
+typedef enum
+{
+  RET_SUCCESS,
+  RET_EVENT_FAIL,
+  RET_SM_FAIL,
+  RET_GL_FAIL,
+  RET_REND_FAIL,
+  RET_LAST
 } GameRet;
 
 /**
@@ -64,7 +66,7 @@ bool gamelogic_board_validate_empty_cell(int row, int col);
 
 /**
  * @brief check if there is already a winner
- * 
+ *
  * Only check a 3x3 board
  * Assume there are only 3 different chars: 'X', 'O', ' '
  */
