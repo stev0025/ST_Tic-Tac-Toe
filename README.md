@@ -1,81 +1,56 @@
 # Tic-Tac-Toe Game in C
 
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Installation](#installation)
-3. [How to Play](#how-to-play)
-4. [Features](#features)
-5. [State Machine](#state-machine)
-6. [Code Structure](#code-structure)
-7. [Architecture](#architecture)
-8. [Docker Container](#docker-container)
-
-## Introduction
-A simple Tic-Tac-Toe game implemented in C language.
-The game allows 2 players to take turns and compete againts each other in classic Tic-Tac-Toe.
-Both players play in the same device.
+A simple Tic-Tac-Toe game implemented in C language.\
+The game allows 2 players to take turns and compete againt each other in classic Tic-Tac-Toe.
 
 ## Installation
 1. Build the code by executing `make`
 2. Launch the game by executing `./launch_game.sh`
 
-## How to Play
-TBD
+## Development
+### Docker Container
+A Dockerfile is provided for development environment\
+To use the container, please modify the [VARIABLE] as needed:
+1. cd [PROJECT_DIRECTORY]/ST_Tic-Tac-Toe
+2. docker build -t [USERNAME]/dev-env-tictactoe:latest .
+3. docker run -it --name tictactoe_container [IMAGENAME]:[VERSION] /bin/sh
+
+### CI/CD
+GitHub Actions is utilized for CI/CD.\
+Jobs:
+1. linting:
+    - Description: formats the C code according to guidelines
+    - Trigger: triggered on each push to the repository
+2. compile-and-build:
+    - Description: compiles the code and builds the project artifacts
+    - Trigger: triggered on each push to the repository
+3. test:
+    - Description: runs various tests to ensure code functionality
+    - Trigger: triggered on each push to the repository
 
 ## Features
 ### Board Representation
-Game board and ruler.
 A 3x3 grid to represent the game board.
-A ruler on the perimeter of the board. The ruler indicates the row & column.
 Cells can be occupied by "X", "O", or be empty.
 
-### Player Turn
+### 2 Player Game
 2 players: one is "X", the other is "O".
-The game start with player "X", and they take turns.
-
-### User Input
-Allows player to select a cell to place their symbol by inputting the coordinates in text.
-Player cannot input illegal or occupied cells.
-
-### Game Status
-TBD
-
-### Winning Conditions
-TBD
-
-### Draw Condition
-TBD
-
-### Restart Option
-TBD
+The game starts with player 'X', and they take turns.
 
 ## Architecture: Single-Threaded Event-Driven State Machine architecture
-This Tic-Tac-Toe game is built on single-threaded, Event-Driven, State Machine architecture.
-This architecture combines the simplicity of single-thread programming, responsiveness of event-driven programming with the clarity and organization of a state machine.
+This game is built on single-threaded, Event-Driven, State Machine architecture.
+- Single-Threaded: The entire game runs on a single thread.
+- Event-Driven: The program operates by reacting to events.
+- State Machine: The game maintains a state. It transitions between various states based on the events it processes.
 
-Single-Threaded: The entire game runs on a single thread.
-Event-Driven: The program operates by reacting to events.
-State Machine: The game maintains a state. It transitions between various states based on the events it processes.
-
-the program is designed to wait for an event at the end of each state handler, as it maintains a consistent and responsive game experience. 
-
-### Benefits of Choosen Architecture
-Clarity and Organization: By structuring the game around distinct states, the code becomes more organized and easier to manage.
-
-Ease of Debugging: This clear separation makes debugging simpler, as issues can often be isolated within specific states or transitions. It also allows for easier maintenance and potential expansion of the game, as new states or events can be added with minimal impact on existing code.
-
-Scalability: It also allows for potential expansion of the game, as new states or events can be added with minimal impact on existing code.
-
-Responsive User Experience: It ensures that the game responds promptly and efficiently to user inputs and other events, leading to a responsive and engaging user experience.
-
-Predictable Behavior: The state machine approach provides a clear and predictable flow of the game, which is crucial for both the players and developers. It helps in understanding how the game will behave in different scenarios.
+The program is designed to wait for an event at the end of each state handler, as it maintains a consistent and responsive game experience. 
 
 ## State Machine and Events
 ### List of States
 #### Initialization
 The initial state when the game first launches.
 In this state, the game displays a welcome message and a brief introduction to the game.
-After displaying the welcome message and introduction for a few seconds, The game prompts the player to input any button in order to continue. This message serves to engage the player and signals that the game is ready to proceed upon their input.
+After displaying the welcome message and introduction for a few seconds, the game prompts the player to input any button in order to continue. This message serves to engage the player and signals that the game is ready to proceed upon their input.
 
 #### Empty Board
 This state displays the current scores.
@@ -95,28 +70,17 @@ Conclude the game by displaying the result, whether it's a win for a player or a
 Ask players if they want to play another round or exit the game.
 
 #### Error
-An error state when unexpected event occurs.
+An error state occurs when an unexpected event happens.
 
 ### List of Events
-#### Start Program
-
-#### Start Game
-The "Start Game" event is marking the transition from the initialization phase to the actual start of the game. This event is designed to occur at the end of the Initialization State.
-
-User Input: The "Start Game" event is triggered by any user input, such as a mouse click or a keypress. This design choice ensures that the game progresses at the player's pace, allowing them to start the game when they are ready.
-
-#### First Player Action
-The "First Player Action" event marks that we have given enough time to the users to understand the situation in "Empty Board" state. This event is triggered by timer.
-
-#### Player Filled In
-
-#### Player Next Turn
-
-#### Winner Announce
-
-#### End Game
-
-#### Restart
+- Start Program
+- Start Game
+- First Player Action
+- Player Filled In
+- Player Next Turn
+- Winner Announce
+- End Game
+- Restart
 
 ### Transitions between states
 ```
@@ -133,6 +97,7 @@ End Game        --Restart          --> Empty Board
 ## Code Structure
 ```
 ST_Tic-Tac-Toe
+|-- .github/workflows/ci-pipeline.yml
 |-- include/
 |   |-- event.h
 |   |-- game_logic.h
@@ -150,9 +115,3 @@ ST_Tic-Tac-Toe
 |-- README.md
 ```
 
-## Docker Container
-A Dockerfile is provided for development environment
-To use the container, please modify the [VARIABLE] as needed:
-1. cd [PROJECT_DIRECTORY]/ST_Tic-Tac-Toe
-2. docker build -t [USERNAME]/dev-env-tictactoe:latest .
-3. docker run -it --name tictactoe_container [IMAGENAME]:[VERSION] /bin/sh
